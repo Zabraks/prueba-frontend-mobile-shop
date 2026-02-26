@@ -1,0 +1,45 @@
+@use 'primitives' as p;
+
+$color-background: p.$primitive-white;
+$color-surface: p.$primitive-gray-100;
+$color-border: p.$primitive-gray-300;
+$color-text-primary: p.$primitive-black;
+$color-text-secondary: p.$primitive-gray-500;
+$color-text-inverse: p.$primitive-white;
+
+$font-family: p.$primitive-font-sans;
+$font-size-sm: p.$primitive-size-sm;
+$font-size-md: p.$primitive-size-md;
+$font-size-lg: p.$primitive-size-lg;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+$color-action-bg: p.$primitive-black;
+$color-action-text: p.$primitive-white;
+$color-action-disabled: p.$primitive-gray-300;
+
+$color-selected-border: p.$primitive-black;
+$color-unselected-border: p.$primitive-gray-300;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+
+$space-sm: p.$primitive-space-2;
+$space-md: p.$primitive-space-4;
+$space-lg: p.$primitive-space-6;
+$space-xl: p.$primitive-space-8;
+
+$border-radius: p.$primitive-radius-none;
+$border-width: 1px;
+
+$max-width: p.$primitive-max-width;
+$navbar-height: p.$primitive-navbar-height;
+
+$grid-columns-desktop: 5;
+$grid-columns-tablet: 3;
+$grid-columns-mobile: 2;
+$grid-gap: p.$primitive-space-2;
