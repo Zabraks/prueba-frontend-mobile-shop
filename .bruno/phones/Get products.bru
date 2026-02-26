@@ -1,0 +1,22 @@
+meta {
+  name: Get products
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/products?search&limit&offset
+  body: none
+  auth: inherit
+}
+
+params:query {
+  search: 
+  limit: 
+  offset: 
+}
+
+headers {
+  accept: application/json
+  x-api-key: {{apiKey}}
+}
