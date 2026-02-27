@@ -1,0 +1,22 @@
+@use '@/styles/tokens' as t;
+@use '@/styles/mixins' as m;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: t.$border-width;
+  background-color: t.$color-border;
+  border: t.$border-width solid t.$color-border;
+
+  @include m.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.mobile {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.item {
+  background-color: t.$color-background;
+}

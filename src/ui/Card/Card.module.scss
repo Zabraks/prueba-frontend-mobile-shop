@@ -1,0 +1,9 @@
+@use '@/styles/tokens' as t;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: t.$color-background;
+  padding: t.$space-md;
+  height: 100%;
+}

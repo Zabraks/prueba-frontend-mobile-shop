@@ -20,6 +20,7 @@ export default defineConfig({
       '@/features': path.resolve(__dirname, './src/features'),
       '@/hooks': path.resolve(__dirname, './src/hooks'),
       '@/lib': path.resolve(__dirname, './src/lib'),
+      '@/mocks': path.resolve(__dirname, './src/mocks'),
       '@/services': path.resolve(__dirname, './src/services'),
       '@/styles': path.resolve(__dirname, './src/styles'),
       '@/ui': path.resolve(__dirname, './src/ui'),

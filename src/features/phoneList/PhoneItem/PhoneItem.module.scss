@@ -1,0 +1,65 @@
+@use '@/styles/tokens' as t;
+
+.phoneCard {
+  display: flex;
+  flex-direction: column;
+  background-color: t.$color-background;
+  cursor: pointer;
+  gap: t.$space-lg;
+
+  &:hover .image {
+    transform: scale(1.03);
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: t.$color-background;
+}
+
+.image {
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: t.$space-sm t.$space-md;
+  gap: t.$space-sm;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.brand {
+  font-size: t.$font-size-xs;
+  color: t.$color-text-secondary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.name {
+  font-size: t.$font-size-sm;
+  font-weight: t.$font-weight-light;
+  color: t.$color-text-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  font-size: t.$font-size-sm;
+  color: t.$color-text-primary;
+  white-space: nowrap;
+  flex-shrink: 0;
+}

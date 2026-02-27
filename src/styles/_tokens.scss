@@ -2,12 +2,13 @@
 
 $color-background: p.$primitive-white;
 $color-surface: p.$primitive-gray-100;
-$color-border: p.$primitive-gray-300;
+$color-border: p.$primitive-black;
 $color-text-primary: p.$primitive-black;
 $color-text-secondary: p.$primitive-gray-500;
 $color-text-inverse: p.$primitive-white;
 
 $font-family: p.$primitive-font-sans;
+$font-size-xs: p.$primitive-size-xs;
 $font-size-sm: p.$primitive-size-sm;
 $font-size-md: p.$primitive-size-md;
 $font-size-lg: p.$primitive-size-lg;
@@ -22,6 +23,7 @@ $color-action-disabled: p.$primitive-gray-300;
 $color-selected-border: p.$primitive-black;
 $color-unselected-border: p.$primitive-gray-300;
 
+$font-weight-light: 300;
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-bold: 700;
@@ -36,6 +38,7 @@ $space-xl: p.$primitive-space-8;
 $space-2xl: p.$primitive-space-25;
 
 $border-radius: p.$primitive-radius-none;
+$border-card-width: 0.5px;
 $border-width: 1px;
 
 $max-width: p.$primitive-max-width;
