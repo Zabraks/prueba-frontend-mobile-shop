@@ -1,4 +1,4 @@
-@use 'primitives' as p;
+@use '@/styles/primitives' as p;
 
 $color-background: p.$primitive-white;
 $color-surface: p.$primitive-gray-100;
@@ -11,6 +11,7 @@ $font-family: p.$primitive-font-sans;
 $font-size-sm: p.$primitive-size-sm;
 $font-size-md: p.$primitive-size-md;
 $font-size-lg: p.$primitive-size-lg;
+$font-size-xl: p.$primitive-size-xl;
 $font-weight-regular: 400;
 $font-weight-bold: 700;
 
@@ -32,6 +33,7 @@ $space-sm: p.$primitive-space-2;
 $space-md: p.$primitive-space-4;
 $space-lg: p.$primitive-space-6;
 $space-xl: p.$primitive-space-8;
+$space-2xl: p.$primitive-space-25;
 
 $border-radius: p.$primitive-radius-none;
 $border-width: 1px;

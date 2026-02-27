@@ -1,0 +1,40 @@
+@use '@/styles/tokens' as t;
+@use '@/styles/mixins' as m;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: t.$color-background;
+  border-bottom: t.$border-width solid t.$color-border;
+  height: t.$navbar-height;
+}
+
+.nav {
+  @include m.container;
+  @include m.flex-between;
+  height: 100%;
+}
+
+.logo {
+  color: t.$color-text-primary;
+  height: t.$font-size-xl; // o el size token que corresponda
+  width: auto;
+}
+
+.cartLink {
+  display: flex;
+  align-items: center;
+  gap: t.$space-sm;
+}
+
+.cartIcon {
+  color: t.$color-text-primary;
+  height: t.$font-size-md;
+  width: auto;
+}
+
+.cartCount {
+  font-size: t.$font-size-md;
+  color: t.$color-text-primary;
+}

@@ -1,4 +1,4 @@
-@use 'tokens' as t;
+@use '@/styles/_tokens' as t;
 
 // Breakpoints
 @mixin mobile {
@@ -22,9 +22,11 @@
 
 @mixin container {
   width: 100%;
-  max-width: t.$max-width;
   margin: 0 auto;
   padding: 0 t.$space-md;
+  @include desktop {
+    padding: 0 t.$space-2xl;
+  }
 }
 
 @mixin flex-center {
