@@ -12,7 +12,7 @@ export const phoneService = {
     if (limit) queryParams.append('limit', String(limit));
     if (offset) queryParams.append('offset', String(offset));
 
-    const query = queryParams.toString() || '';
+    const query = `?${queryParams.toString()}` || '';
     return httpClient(`/products${query}`);
   },
   getPhoneById: (id: string): Promise<PhoneDetail> => httpClient(`/products/${id}`),

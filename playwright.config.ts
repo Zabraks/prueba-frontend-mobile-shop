@@ -27,6 +27,8 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: 'http://localhost:3000',
+    //TODO: superar el umbral de onrender.com para levantar el api, si da tiempo interceptamos las peticiones con los mocks
+    actionTimeout: 10000,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
