@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { PHONE_LIST_STRINGS } from '@/features/phoneList/PhoneList/constants';
 
 test.describe('Phone List', () => {
   test.beforeEach(async ({ page }) => {
@@ -7,7 +8,7 @@ test.describe('Phone List', () => {
 
   test('displays the phone grid', async ({ page }) => {
     await expect(
-      page.getByRole('list', { name: 'Phone list' })
+      page.getByRole('list', { name: PHONE_LIST_STRINGS.gridAriaLabel })
     ).toBeVisible();
   });
 

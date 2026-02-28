@@ -49,7 +49,8 @@ describe('Navbar', () => {
 
     it('has a nav element with aria-label', () => {
       render(<Navbar />);
-      expect(screen.getByRole('navigation', { name: 'Navegación principal' })).toBeInTheDocument();
+      const nav = screen.getByRole('navigation', { name: NAVBAR_STRINGS.mainNavigationLabel });
+      expect(nav).toBeInTheDocument();
     });
   });
 });

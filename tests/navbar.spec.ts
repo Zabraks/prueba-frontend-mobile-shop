@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
 
 test.describe('Navbar', () => {
   test.beforeEach(async ({ page }) => {
@@ -6,22 +7,30 @@ test.describe('Navbar', () => {
   });
 
   test('is visible', async ({ page }) => {
-    await expect(page.getByRole('navigation')).toBeVisible();
+    const nav = page.getByRole('navigation', { name: NAVBAR_STRINGS.mainNavigationLabel })
+    
+    await expect(nav).toBeVisible();
   });
 
   test('the cart icon navigates to /cart', async ({ page }) => {
-    await page.getByRole('link', { name: /carrito/i }).click();
+    const cart = page.getByRole('link', { name: NAVBAR_STRINGS.cartAriaLabel(0) })
+    await cart.click();
+
     await expect(page).toHaveURL('/cart');
   });
 
   test('the logo navigates to /phones', async ({ page }) => {
-    await page.getByRole('link', { name: 'Ir al inicio' }).click();
+    const logo = page.getByRole('link', { name: NAVBAR_STRINGS.logoAriaLabel });
+    await logo.click();
+
     await expect(page).toHaveURL('/phones');
   });
 
   //TODO: adaptar cuando hagamos el carrito
   test('the cart counter displays 0 initially', async ({ page }) => {
-    await expect(page.getByRole('link', { name: /carrito/i })).toBeVisible();
-    await expect(page.getByText('0')).toBeVisible();
+    const cart = page.getByRole('link', { name: NAVBAR_STRINGS.cartAriaLabel(0) });
+
+    await expect(cart).toBeVisible();
+    await expect(cart.getByText('0')).toBeVisible();
   });
 });
