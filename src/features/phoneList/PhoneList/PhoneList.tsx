@@ -1,19 +1,28 @@
 //TODO: aqui estará el searchbar con tanstack query, por eso ponemos useClient
 'use client';
 
+import { useState } from 'react';
 import { usePhoneList } from '@/hooks/usePhoneList';
+import { useDebounce } from '@/hooks/useDebounce/useDebounce';
 import styles from './PhoneList.module.scss';
+import { SearchBar } from '../SearchBar/SearchBar';
 import { Grid } from '@/ui/Grid/Grid';
 import { PhoneListItem } from '@/domain/phone/phone.types';
-import { PHONE_LIST_STRINGS } from './constants';
 import { PhoneItem } from '@/features/phoneList/PhoneItem/PhoneItem';
+import { PHONE_LIST_STRINGS } from './constants';
 
 interface PhoneListProps {
   initialPhones: PhoneListItem[];
 }
 
 export const PhoneList = ({ initialPhones }: PhoneListProps) => {
-  const { data: phones = initialPhones, isError } = usePhoneList(initialPhones);
+  const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search);
+
+  const { data: phones = initialPhones, isError } = usePhoneList(
+    initialPhones,
+    debouncedSearch ? { search: debouncedSearch } : {}
+  );
 
   if (isError) {
     return <p>{PHONE_LIST_STRINGS.errorMessage}</p>;
@@ -21,8 +30,7 @@ export const PhoneList = ({ initialPhones }: PhoneListProps) => {
 
   return (
     <div className={styles.wrapper}>
-      {/* SEARCH BAR */}
-      {/* GRID */}
+      <SearchBar value={search} onChange={setSearch} resultsCount={phones.length} />
       <Grid
         items={phones}
         keyExtractor={(phone, key) => `${phone.id}-${key}`}
