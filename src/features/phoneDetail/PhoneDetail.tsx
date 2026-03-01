@@ -12,7 +12,7 @@ import { Button } from '@/ui/Button/Button';
 import { ROUTES } from '@/lib/routes';
 import styles from './PhoneDetail.module.scss';
 import { PHONE_DETAIL_STRINGS } from './constants';
-import { useCartContext } from '@/context/CartContext';
+import { useCartContext } from '@/context/CartContext/CartContext';
 
 interface PhoneDetailProps {
   data: PhoneDetailType;
@@ -118,8 +118,8 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
               // TODO: meter en strings
               aria-label={
                 canAddToCart
-                  ? `Add ${data.name} to cart`
-                  : 'Select storage and color to add to cart'
+                  ? PHONE_DETAIL_STRINGS.addToCart(data.name)
+                  : PHONE_DETAIL_STRINGS.addToCartDisabled
               }
             >
               {PHONE_DETAIL_STRINGS.addToCart}

@@ -4,7 +4,7 @@ import styles from './CartLink.module.scss';
 import { CartIcon } from '@/assets/icons/CartIcon';
 import { ROUTES } from '@/lib/routes';
 import { CART_LINK_STRINGS } from './constants';
-import { useCartContext } from '@/context/CartContext';
+import { useCartContext } from '@/context/CartContext/CartContext';
 
 export const CartLink = () => {
   const { totalItems } = useCartContext();

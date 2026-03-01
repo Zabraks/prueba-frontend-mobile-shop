@@ -7,25 +7,28 @@ import styles from './CartFooter.module.scss';
 interface CartFooterProps {
   totalPrice: number;
   hasItems: boolean;
+  onPay: () => void;
 }
 
-export const CartFooter = ({ totalPrice, hasItems }: CartFooterProps) => {
+export const CartFooter = ({ totalPrice, hasItems, onPay }: CartFooterProps) => {
   return (
     <footer className={styles.footer}>
-      <Link href={ROUTES.phones}>
+      <Link href={ROUTES.phones} aria-flowto="cart-total">
         <Button variant="ghost">{CART_FOOTER_STRINGS.continueShopping}</Button>
       </Link>
 
       {hasItems && (
-        <div className={styles.right}>
-          <span className={styles.total}>
+        <>
+          <span className={styles.total} id="total-price" aria-flowto="cart-pay">
             {CART_FOOTER_STRINGS.total}
-            <strong>
+            <span>
               {totalPrice} {CART_FOOTER_STRINGS.currency}
-            </strong>
+            </span>
           </span>
-          <Button variant="primary">{CART_FOOTER_STRINGS.pay}</Button>
-        </div>
+          <Button variant="primary" onClick={onPay}>
+            {CART_FOOTER_STRINGS.pay}
+          </Button>
+        </>
       )}
     </footer>
   );

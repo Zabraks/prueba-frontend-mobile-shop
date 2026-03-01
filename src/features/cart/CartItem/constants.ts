@@ -1,5 +1,5 @@
 export const CART_ITEM_STRINGS = {
-  remove: 'Eliminar',
+  remove: 'ELIMINAR',
   removeAriaLabel: (name: string) => `Remove ${name} from cart`,
   currency: 'EUR',
   specsseparator: '|',

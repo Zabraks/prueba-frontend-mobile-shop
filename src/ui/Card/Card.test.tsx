@@ -4,23 +4,33 @@ import { Card } from '@/ui/Card/Card';
 describe('Card', () => {
   describe('rendering', () => {
     it('renders children', () => {
-      render(<Card>Card content</Card>);
-      expect(screen.getByText('Card content')).toBeInTheDocument();
+      const cardContent = 'Card content';
+
+      render(<Card>{cardContent}</Card>);
+      const contentValue = screen.getByText(cardContent);
+
+      expect(contentValue).toBeInTheDocument();
     });
 
     it('renders as an article element', () => {
       render(<Card>content</Card>);
-      expect(screen.getByRole('article')).toBeInTheDocument();
+      const article = screen.getByRole('article');
+
+      expect(article).toBeInTheDocument();
     });
 
     it('applies extra className when provided', () => {
       render(<Card className="extra">content</Card>);
-      expect(screen.getByRole('article')).toHaveClass('extra');
+      const article = screen.getByRole('article');
+
+      expect(article).toHaveClass('extra');
     });
 
     it('renders without extra className when not provided', () => {
       render(<Card>content</Card>);
-      expect(screen.getByRole('article').className).not.toContain('undefined');
+      const articleClassName = screen.getByRole('article').className;
+
+      expect(articleClassName).not.toContain('undefined');
     });
   });
 });

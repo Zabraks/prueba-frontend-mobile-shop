@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { CartItem } from '@/domain/cart/CartItem';
+import { CartItem } from '@/domain/cart/cart.types';
 
 interface CartState {
   items: CartItem[];
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const totalPrice = state.items.reduce((acc, item) => acc + item.price, 0);
 
-  const isInCart = (phoneId: string) => state.items.some((item) => item.phone.id === phoneId);
+  const isInCart = (phoneId: string) => state.items.some((item) => item.id === phoneId);
 
   return (
     <CartContext.Provider

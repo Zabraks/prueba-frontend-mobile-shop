@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CartProvider } from '@/context/CartContext';
+import { CartProvider } from '@/context/CartContext/CartContext';
 import { QueryProvider } from '@/context/QueryProvider';
 import { Navbar } from '@/features/layout/Navbar/Navbar';
 import '@/styles/globals.scss';

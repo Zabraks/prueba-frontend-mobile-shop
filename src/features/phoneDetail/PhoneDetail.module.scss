@@ -64,7 +64,7 @@
   flex-direction: column;
   gap: t.$space-lg;
   @include m.desktop {
-    padding-left: t.$space-4xl;
+    padding-left: t.$space-5xl;
   }
 }
 
@@ -138,6 +138,7 @@
   grid-template-columns: 1fr;
   gap: t.$space-2xl;
   align-items: start;
+  width: 100%;
 
   @include m.desktop {
     width: t.$max-width;

@@ -46,7 +46,9 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      expect(screen.getAllByRole('listitem')).toHaveLength(mockPhoneList.length);
+      const phoneItems = screen.getAllByRole('listitem');
+
+      expect(phoneItems).toHaveLength(mockPhoneList.length);
     });
 
     it('renders the search bar', () => {
@@ -57,7 +59,9 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      expect(screen.getByPlaceholderText(SEARCH_BAR_STRINGS.placeholder)).toBeInTheDocument();
+      const searchBox = screen.getByPlaceholderText(SEARCH_BAR_STRINGS.placeholder);
+
+      expect(searchBox).toBeInTheDocument();
     });
   });
 
@@ -73,11 +77,12 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      fireEvent.change(screen.getByRole('searchbox'), {
-        target: { value: query },
-      });
+      const searchBox = screen.getByRole('searchbox');
+      fireEvent.change(searchBox, { target: { value: query } });
 
-      expect(screen.getAllByRole('listitem')).toHaveLength(filtered.length);
+      const phoneItems = screen.getAllByRole('listitem');
+
+      expect(phoneItems).toHaveLength(filtered.length);
     });
 
     it('filters phones by brand', () => {
@@ -90,11 +95,12 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      fireEvent.change(screen.getByRole('searchbox'), {
-        target: { value: query },
-      });
+      const searchBox = screen.getByRole('searchbox');
+      fireEvent.change(searchBox, { target: { value: query } });
 
-      expect(screen.getAllByRole('listitem')).toHaveLength(filtered.length);
+      const phoneItems = screen.getAllByRole('listitem');
+
+      expect(phoneItems).toHaveLength(filtered.length);
     });
 
     it('filters phones matching brand or name simultaneously', () => {
@@ -107,11 +113,12 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      fireEvent.change(screen.getByRole('searchbox'), {
-        target: { value: query },
-      });
+      const searchBox = screen.getByRole('searchbox');
+      fireEvent.change(searchBox, { target: { value: query } });
 
-      expect(screen.getAllByRole('listitem')).toHaveLength(filtered.length);
+      const phoneItems = screen.getAllByRole('listitem');
+
+      expect(phoneItems).toHaveLength(filtered.length);
     });
 
     it('shows 0 results when search has no matches', () => {
@@ -121,12 +128,14 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      fireEvent.change(screen.getByRole('searchbox'), {
-        target: { value: 'qwertyuiop' },
-      });
+      const searchBox = screen.getByRole('searchbox');
+      fireEvent.change(searchBox, { target: { value: 'qwertyuiop' } });
 
-      expect(screen.queryAllByRole('listitem')).toHaveLength(0);
-      expect(screen.getByText(SEARCH_BAR_STRINGS.results(0))).toBeInTheDocument();
+      const phoneItems = screen.queryAllByRole('listitem');
+      const resultsText = screen.getByText(SEARCH_BAR_STRINGS.results(0));
+
+      expect(phoneItems).toHaveLength(0);
+      expect(resultsText).toBeInTheDocument();
     });
 
     it('clears search and restores initial phones', () => {
@@ -140,13 +149,15 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      fireEvent.change(screen.getByRole('searchbox'), {
-        target: { value: query },
-      });
+      const searchBox = screen.getByRole('searchbox');
+      fireEvent.change(searchBox, { target: { value: query } });
 
-      fireEvent.click(screen.getByLabelText(SEARCH_BAR_STRINGS.clearAriaLabel));
+      const clearButton = screen.getByLabelText(SEARCH_BAR_STRINGS.clearAriaLabel);
+      fireEvent.click(clearButton);
 
-      expect(screen.getAllByRole('listitem')).toHaveLength(mockPhoneList.length);
+      const phoneItems = screen.getAllByRole('listitem');
+
+      expect(phoneItems).toHaveLength(mockPhoneList.length);
     });
 
     it('does not filter when search term is shorter than 3 characters', () => {
@@ -157,11 +168,12 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
-      fireEvent.change(screen.getByRole('searchbox'), {
-        target: { value: 'sa' },
-      });
+      const searchBox = screen.getByRole('searchbox');
+      fireEvent.change(searchBox, { target: { value: 'sa' } });
 
-      expect(screen.getAllByRole('listitem')).toHaveLength(mockPhoneList.length);
+      const phoneItems = screen.getAllByRole('listitem');
+
+      expect(phoneItems).toHaveLength(mockPhoneList.length);
     });
   });
 
@@ -174,7 +186,9 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={[]} />);
 
-      expect(screen.getByText(PHONE_LIST_STRINGS.errorMessage)).toBeInTheDocument();
+      const errorMessage = screen.getByText(PHONE_LIST_STRINGS.errorMessage);
+
+      expect(errorMessage).toBeInTheDocument();
     });
 
     it('does not render the grid when there is an error', () => {
@@ -185,9 +199,9 @@ describe('PhoneList', () => {
 
       render(<PhoneList initialPhones={[]} />);
 
-      expect(
-        screen.queryByRole('list', { name: PHONE_LIST_STRINGS.gridAriaLabel })
-      ).not.toBeInTheDocument();
+      const phoneItems = screen.queryByRole('list', { name: PHONE_LIST_STRINGS.gridAriaLabel });
+
+      expect(phoneItems).not.toBeInTheDocument();
     });
   });
 });

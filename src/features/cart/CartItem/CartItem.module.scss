@@ -1,36 +1,50 @@
 @use '@/styles/tokens' as t;
+@use '@/styles/mixins' as m;
 
 .wrapper {
   display: flex;
   gap: t.$space-md;
   padding: t.$space-md 0;
-  border-bottom: t.$border-width solid t.$color-border;
 }
 
 .imageWrapper {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 190px;
   flex-shrink: 0;
-  background-color: t.$color-surface;
+
+  @include m.desktop {
+    width: 262px;
+    height: 324px;
+  }
 }
 
 .image {
   object-fit: contain;
-  padding: t.$space-sm;
+}
+
+.data {
+  @include m.flex-column;
+  gap: t.$space-xl;
+  justify-content: center;
+
+  @include m.desktop {
+    justify-content: space-between;
+    padding: t.$space-3xl 0;
+  }
 }
 
 .info {
-  display: flex;
-  flex-direction: column;
-  gap: t.$space-xs;
-  justify-content: center;
+  @include m.flex-column;
+  gap: t.$space-md;
+  font-size: t.$font-size-xs;
 }
 
-.name {
-  font-size: t.$font-size-sm;
-  font-weight: t.$font-weight-bold;
-  color: t.$color-text-primary;
+.phone {
+  @include m.flex-column;
+  gap: t.$space-xs;
+
+  text-transform: uppercase;
 }
 
 .specs {
@@ -41,4 +55,9 @@
 .price {
   font-size: t.$font-size-sm;
   color: t.$color-text-primary;
+}
+
+.removeButton {
+  align-self: flex-start;
+  font-size: t.$font-size-xs;
 }

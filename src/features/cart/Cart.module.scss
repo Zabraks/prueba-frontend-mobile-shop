@@ -5,16 +5,16 @@
   @include m.container;
   padding-top: t.$space-lg;
   padding-bottom: t.$space-2xl;
+  gap: t.$space-lg;
   min-height: calc(100vh - t.$navbar-height);
   display: flex;
   flex-direction: column;
 }
 
 .title {
-  font-size: t.$font-size-md;
-  font-weight: t.$font-weight-bold;
-  letter-spacing: 0.5px;
-  margin-bottom: t.$space-lg;
+  font-size: t.$font-size-lg;
+  font-weight: t.$font-weight-light;
+  letter-spacing: 0px;
 }
 
 .list {

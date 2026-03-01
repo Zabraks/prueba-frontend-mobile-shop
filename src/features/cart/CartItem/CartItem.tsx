@@ -17,17 +17,22 @@ export const CartItem = ({ item, onRemove }: CartItemProps) => {
       <div className={styles.imageWrapper}>
         <Image src={img} alt={name} fill sizes="120px" className={styles.image} />
       </div>
-      <div className={styles.info}>
-        <p className={styles.name}>{name.toUpperCase()}</p>
-        <p className={styles.specs}>
-          {selectedStorage} {CART_ITEM_STRINGS.specseparator} {selectedColor?.toUpperCase()}
-        </p>
-        <p className={styles.price}>
-          {price} {CART_ITEM_STRINGS.currency}
-        </p>
+      <div className={styles.data}>
+        <div className={styles.info}>
+          <div className={styles.phone}>
+            <p>{name}</p>
+            <p>
+              {selectedStorage} {CART_ITEM_STRINGS.specseparator} {selectedColor}
+            </p>
+          </div>
+          <p>
+            {price} {CART_ITEM_STRINGS.currency}
+          </p>
+        </div>
         <Button
+          className={styles.removeButton}
           variant="danger"
-          onClick={() => onRemove()}
+          onClick={() => onRemove(item.id)}
           aria-label={CART_ITEM_STRINGS.removeAriaLabel(name)}
         >
           {CART_ITEM_STRINGS.remove}

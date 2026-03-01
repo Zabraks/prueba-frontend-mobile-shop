@@ -21,19 +21,25 @@ describe('Grid', () => {
   describe('rendering', () => {
     it('renders as a list element', () => {
       renderMockComponent();
-      expect(screen.getByRole('list')).toBeInTheDocument();
+      const grid = screen.getByRole('list');
+
+      expect(grid).toBeInTheDocument();
     });
 
     it('renders all items', () => {
       renderMockComponent();
-      expect(screen.getAllByRole('listitem')).toHaveLength(3);
+      const itemsGrid = screen.getAllByRole('listitem');
+
+      expect(itemsGrid).toHaveLength(3);
     });
 
     it('renders the content of each item', () => {
       renderMockComponent();
-      expect(screen.getByText('Item One')).toBeInTheDocument();
-      expect(screen.getByText('Item Two')).toBeInTheDocument();
-      expect(screen.getByText('Item Three')).toBeInTheDocument();
+
+      mockItems.forEach((item) => {
+        const itemGrid = screen.getByText(item.label);
+        expect(itemGrid).toBeInTheDocument();
+      });
     });
 
     it('renders an empty list when items array is empty', () => {
@@ -45,14 +51,22 @@ describe('Grid', () => {
           renderItem={() => <span>item</span>}
         />
       );
-      expect(screen.queryAllByRole('listitem')).toHaveLength(0);
+
+      const items = screen.queryAllByRole('listitem');
+
+      expect(items).toHaveLength(0);
     });
   });
 
   describe('accessibility', () => {
     it('applies the ariaLabel to the list', () => {
-      renderMockComponent('Phone list');
-      expect(screen.getByRole('list', { name: 'Phone list' })).toBeInTheDocument();
+      const name = 'Phone list';
+
+      renderMockComponent(name);
+
+      const grid = screen.getByRole('list', { name: name });
+
+      expect(grid).toBeInTheDocument();
     });
   });
 });
