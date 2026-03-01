@@ -1,0 +1,30 @@
+@use '@/styles/tokens' as t;
+
+.progressBar {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background-color: t.$color-text-primary;
+  transition: none;
+
+  &[data-loading='true'] {
+    animation: progress 500ms ease-out forwards;
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 0;
+    opacity: 1;
+  }
+  80% {
+    width: 90%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}

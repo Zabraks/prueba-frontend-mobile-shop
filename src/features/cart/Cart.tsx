@@ -9,8 +9,6 @@ import styles from './Cart.module.scss';
 export const Cart = () => {
   const { items, removeItem, totalPrice, totalItems } = useCartContext();
 
-  console.log('Cart items:', items);
-
   const clearCart = () => {
     items.forEach((item) => removeItem(item.id));
   };
