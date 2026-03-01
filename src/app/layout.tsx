@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { CartProvider } from '@/context/CartContext/CartContext';
 import { QueryProvider } from '@/context/QueryProvider';
 import { Navbar } from '@/features/layout/Navbar/Navbar';
 import '@/styles/globals.scss';
@@ -17,8 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <QueryProvider>
-          <Navbar />
-          {children}
+          <CartProvider>
+            <Navbar />
+            {children}
+          </CartProvider>
         </QueryProvider>
       </body>
     </html>

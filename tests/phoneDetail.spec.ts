@@ -117,7 +117,7 @@ test.describe('Phone Detail', () => {
 
   test.describe('add to cart button', () => {
     test('is disabled when no storage and color are selected', async ({ page }) => {
-      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCart });
+      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCartDisabled });
 
       await expect(addToCartButton).toBeDisabled();
     });
@@ -127,7 +127,7 @@ test.describe('Phone Detail', () => {
       const secondColor = colorGroup.getByRole('button').nth(1);
       await secondColor.click();
 
-      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCart });
+      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCartDisabled });
 
       await expect(addToCartButton).toBeDisabled();
     });
@@ -143,7 +143,7 @@ test.describe('Phone Detail', () => {
       const secondColor = colorGroup.getByRole('button').nth(1);
       await secondColor.click();
 
-      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCart });
+      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCart(mockPhoneDetail.name) });
 
       await expect(addToCartButton).toBeEnabled();
     });

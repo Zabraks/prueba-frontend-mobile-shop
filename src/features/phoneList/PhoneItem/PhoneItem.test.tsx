@@ -15,26 +15,36 @@ describe('PhoneItem', () => {
   describe('rendering', () => {
     it('renders the phone brand in uppercase', () => {
       render(<PhoneItem phone={mockPhone} />);
-      expect(screen.getByText(mockPhone.brand.toUpperCase())).toBeInTheDocument();
+
+      const brand = screen.getByText(mockPhone.brand.toUpperCase());
+
+      expect(brand).toBeInTheDocument();
     });
 
     it('renders the phone name in uppercase', () => {
       render(<PhoneItem phone={mockPhone} />);
-      expect(screen.getByText(mockPhone.name.toUpperCase())).toBeInTheDocument();
+
+      const name = screen.getByText(mockPhone.name.toUpperCase());
+
+      expect(name).toBeInTheDocument();
     });
 
     it('renders the phone price with currency', () => {
       render(<PhoneItem phone={mockPhone} />);
-      expect(
-        screen.getByText(`${mockPhone.basePrice} ${PHONE_CARD_STRINGS.currency}`)
-      ).toBeInTheDocument();
+
+      const price = screen.getByText(`${mockPhone.basePrice} ${PHONE_CARD_STRINGS.currency}`);
+
+      expect(price).toBeInTheDocument();
     });
 
     it('renders the phone image with correct alt text', () => {
       render(<PhoneItem phone={mockPhone} />);
-      expect(
-        screen.getByAltText(PHONE_CARD_STRINGS.imageAlt(mockPhone.brand, mockPhone.name))
-      ).toBeInTheDocument();
+
+      const image = screen.getByAltText(
+        PHONE_CARD_STRINGS.imageAlt(mockPhone.brand, mockPhone.name)
+      );
+
+      expect(image).toBeInTheDocument();
     });
   });
 

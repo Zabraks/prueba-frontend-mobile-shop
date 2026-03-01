@@ -8,13 +8,13 @@
 }
 
 @mixin tablet {
-  @media (min-width: 768px) and (max-width: 1024px) {
+  @media (min-width: 768px) and (max-width: 1405px) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: 1025px) {
+  @media (min-width: 1406px) {
     @content;
   }
 }
@@ -25,7 +25,7 @@
   margin: 0 auto;
   padding: 0 t.$space-md;
   @include desktop {
-    padding: 0 t.$space-3xl;
+    padding: 0 t.$space-5xl;
   }
 }
 

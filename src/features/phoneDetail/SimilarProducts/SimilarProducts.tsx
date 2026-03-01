@@ -16,6 +16,7 @@ export const SimilarProducts = ({ phones }: SimilarProductsProps) => {
         items={phones}
         keyExtractor={(phone, key) => `${phone.id}-${key}`}
         ariaLabel={SIMILAR_PRODUCTS_STRINGS.gridAriaLabel}
+        variant="extended"
         renderItem={(phone) => <PhoneItem phone={phone} />}
       />
     </section>

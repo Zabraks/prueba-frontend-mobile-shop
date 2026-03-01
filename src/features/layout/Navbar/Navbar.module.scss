@@ -20,20 +20,3 @@
   height: t.$font-size-xl; // o el size token que corresponda
   width: auto;
 }
-
-.cartLink {
-  display: flex;
-  align-items: center;
-  gap: t.$space-sm;
-}
-
-.cartIcon {
-  color: t.$color-text-primary;
-  height: t.$font-size-md;
-  width: auto;
-}
-
-.cartCount {
-  font-size: t.$font-size-md;
-  color: t.$color-text-primary;
-}

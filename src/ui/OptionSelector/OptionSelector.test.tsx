@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { OptionSelector } from '@/ui/OptionSelector/OptionSelector';
-import { mockOptions } from '@/mocks/mockOptions';
+import { mockOptions } from '@/mocks/mockOptions.mock';
 
 const ariaLabel = 'Select option';
 
@@ -19,7 +19,10 @@ describe('OptionSelector', () => {
           ariaLabel={ariaLabel}
         />
       );
-      expect(screen.getAllByRole('button')).toHaveLength(3);
+
+      const buttons = screen.getAllByRole('button');
+
+      expect(buttons).toHaveLength(3);
     });
 
     it('marks selected option with aria-pressed', () => {
@@ -34,8 +37,12 @@ describe('OptionSelector', () => {
           ariaLabel={ariaLabel}
         />
       );
-      expect(screen.getByText(selectedOption.label)).toHaveAttribute('aria-pressed', 'true');
-      expect(screen.getByText(notSelectedOption.label)).toHaveAttribute('aria-pressed', 'false');
+
+      const selectedButton = screen.getByText(selectedOption.label);
+      const notSelectedButton = screen.getByText(notSelectedOption.label);
+
+      expect(selectedButton).toHaveAttribute('aria-pressed', 'true');
+      expect(notSelectedButton).toHaveAttribute('aria-pressed', 'false');
     });
 
     it('applies group role with aria-label', () => {
@@ -47,7 +54,10 @@ describe('OptionSelector', () => {
           ariaLabel={ariaLabel}
         />
       );
-      expect(screen.getByRole('group', { name: ariaLabel })).toBeInTheDocument();
+
+      const group = screen.getByRole('group', { name: ariaLabel });
+
+      expect(group).toBeInTheDocument();
     });
   });
 
@@ -63,7 +73,10 @@ describe('OptionSelector', () => {
           ariaLabel={ariaLabel}
         />
       );
-      fireEvent.click(screen.getByText(selectedOption.label));
+
+      const option = screen.getByText(selectedOption.label);
+      fireEvent.click(option);
+
       expect(mockOnChange).toHaveBeenCalledWith(selectedOption);
     });
   });

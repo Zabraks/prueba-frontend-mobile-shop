@@ -16,7 +16,10 @@ describe('ColorSelector', () => {
           onChange={mockOnChange}
         />
       );
-      expect(screen.getAllByRole('button')).toHaveLength(mockPhoneDetail.colorOptions.length);
+
+      const colorButtons = screen.getAllByRole('button');
+
+      expect(colorButtons).toHaveLength(mockPhoneDetail.colorOptions.length);
     });
 
     it('does not show label when no color is selected', () => {
@@ -27,7 +30,10 @@ describe('ColorSelector', () => {
           onChange={mockOnChange}
         />
       );
-      expect(screen.queryByText(mockPhoneDetail.colorOptions[0].name)).not.toBeInTheDocument();
+
+      const colorLabels = screen.queryByText(mockPhoneDetail.colorOptions[0].name);
+
+      expect(colorLabels).not.toBeInTheDocument();
     });
 
     it('shows label of selected color', () => {
@@ -38,7 +44,10 @@ describe('ColorSelector', () => {
           onChange={mockOnChange}
         />
       );
-      expect(screen.getByText(mockPhoneDetail.colorOptions[0].name)).toBeInTheDocument();
+
+      const selectedColor = screen.getByText(mockPhoneDetail.colorOptions[0].name);
+
+      expect(selectedColor).toBeInTheDocument();
     });
   });
 
@@ -51,13 +60,17 @@ describe('ColorSelector', () => {
           onChange={mockOnChange}
         />
       );
-      fireEvent.click(screen.getByLabelText(mockPhoneDetail.colorOptions[0].name));
+
+      const firstColorOption = screen.getByLabelText(mockPhoneDetail.colorOptions[0].name);
+
+      fireEvent.click(firstColorOption);
+
       expect(mockOnChange).toHaveBeenCalledWith(mockPhoneDetail.colorOptions[0]);
     });
   });
 
   describe('accessibility', () => {
-    it('each circle has an aria-label with the color name', () => {
+    it('each selector has an aria-label with the color name', () => {
       render(
         <ColorSelector
           colors={mockPhoneDetail.colorOptions}
@@ -65,8 +78,11 @@ describe('ColorSelector', () => {
           onChange={mockOnChange}
         />
       );
+
       mockPhoneDetail.colorOptions.forEach((color) => {
-        expect(screen.getByLabelText(color.name)).toBeInTheDocument();
+        const colorButton = screen.getByLabelText(color.name);
+
+        expect(colorButton).toBeInTheDocument();
       });
     });
 
@@ -78,10 +94,10 @@ describe('ColorSelector', () => {
           onChange={mockOnChange}
         />
       );
-      expect(screen.getByLabelText(mockPhoneDetail.colorOptions[1].name)).toHaveAttribute(
-        'aria-pressed',
-        'true'
-      );
+
+      const selectedColorButton = screen.getByLabelText(mockPhoneDetail.colorOptions[1].name);
+
+      expect(selectedColorButton).toHaveAttribute('aria-pressed', 'true');
     });
   });
 });

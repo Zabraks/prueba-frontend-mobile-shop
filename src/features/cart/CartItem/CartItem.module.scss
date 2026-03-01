@@ -1,0 +1,63 @@
+@use '@/styles/tokens' as t;
+@use '@/styles/mixins' as m;
+
+.wrapper {
+  display: flex;
+  gap: t.$space-md;
+  padding: t.$space-md 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 160px;
+  height: 190px;
+  flex-shrink: 0;
+
+  @include m.desktop {
+    width: 262px;
+    height: 324px;
+  }
+}
+
+.image {
+  object-fit: contain;
+}
+
+.data {
+  @include m.flex-column;
+  gap: t.$space-xl;
+  justify-content: center;
+
+  @include m.desktop {
+    justify-content: space-between;
+    padding: t.$space-3xl 0;
+  }
+}
+
+.info {
+  @include m.flex-column;
+  gap: t.$space-md;
+  font-size: t.$font-size-xs;
+}
+
+.phone {
+  @include m.flex-column;
+  gap: t.$space-xs;
+
+  text-transform: uppercase;
+}
+
+.specs {
+  font-size: t.$font-size-xs;
+  color: t.$color-text-secondary;
+}
+
+.price {
+  font-size: t.$font-size-sm;
+  color: t.$color-text-primary;
+}
+
+.removeButton {
+  align-self: flex-start;
+  font-size: t.$font-size-xs;
+}
