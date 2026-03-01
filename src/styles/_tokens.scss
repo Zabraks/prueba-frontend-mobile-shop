@@ -20,7 +20,7 @@ $font-weight-bold: 700;
 
 $color-action-bg: p.$primitive-black;
 $color-action-text: p.$primitive-white;
-$color-action-disabled: p.$primitive-gray-300;
+$color-action-disabled: p.$primitive-gray-100;
 
 $color-selected-border: p.$primitive-black;
 $color-unselected-border: p.$primitive-gray-300;
@@ -33,15 +33,22 @@ $font-weight-bold: 700;
 $line-height-tight: 1.2;
 $line-height-normal: 1.5;
 
+$space-xs: p.$primitive-space-1;
 $space-sm: p.$primitive-space-2;
 $space-md: p.$primitive-space-4;
 $space-lg: p.$primitive-space-6;
 $space-xl: p.$primitive-space-8;
-$space-2xl: p.$primitive-space-25;
+$space-2xl: p.$primitive-space-10;
+$space-3xl: p.$primitive-space-25;
+$space-4xl: p.$primitive-space-50;
 
+//TODO: refactor
 $border-radius: p.$primitive-radius-none;
 $border-card-width: 0.5px;
 $border-width: 1px;
+$border-width-strong: 2px;
+$border-color: p.$primitive-gray-300;
+$border-color-selected: p.$primitive-black;
 
 $max-width: p.$primitive-max-width;
 $navbar-height: p.$primitive-navbar-height;

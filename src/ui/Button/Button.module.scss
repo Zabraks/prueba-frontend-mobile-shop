@@ -1,0 +1,44 @@
+@use '@/styles/tokens' as t;
+
+.button {
+  font-family: t.$font-family;
+  font-size: t.$font-size-md;
+  font-weight: t.$font-weight-light;
+  letter-spacing: 8%;
+  padding: t.$space-md t.$space-lg;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s ease;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+
+  &:disabled {
+    background-color: t.$color-action-disabled;
+    color: t.$color-text-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background-color: t.$color-action-bg;
+  color: t.$color-action-text;
+
+  &:hover:not(:disabled) {
+    opacity: 0.85;
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  color: t.$color-text-primary;
+  border: t.$border-width solid t.$color-text-primary;
+
+  &:hover:not(:disabled) {
+    background-color: t.$color-surface;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}

@@ -1,0 +1,145 @@
+@use '@/styles/tokens' as t;
+@use '@/styles/mixins' as m;
+
+.wrapper {
+  @include m.container;
+  padding-top: t.$space-lg;
+  padding-bottom: t.$space-2xl;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.$space-sm;
+  font-size: t.$font-size-sm;
+  color: t.$color-text-primary;
+  margin-bottom: t.$space-lg;
+  letter-spacing: 0.5px;
+
+  & span {
+    font-size: t.$font-size-md;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.content {
+  @include m.flex-column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.$space-2xl;
+  align-items: start;
+  width: 100%;
+
+  @include m.mobile {
+    grid-template-columns: 1fr;
+  }
+
+  @include m.desktop {
+    width: t.$max-width;
+    align-items: center;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: t.$space-lg;
+  @include m.desktop {
+    padding-left: t.$space-4xl;
+  }
+}
+
+.info {
+  @include m.flex-column;
+  gap: t.$space-sm;
+}
+
+.name {
+  font-size: t.$font-size-lg;
+  font-weight: t.$font-weight-light;
+  color: t.$color-text-primary;
+}
+
+.price {
+  font-size: t.$font-size-md;
+  color: t.$color-text-primary;
+}
+
+//TODO: refactor
+.selectors {
+  @include m.flex-column;
+  gap: t.$space-xl;
+}
+
+.section {
+  @include m.flex-column;
+  gap: t.$space-lg;
+}
+
+.sectionLabel {
+  font-size: t.$font-size-sm;
+  color: t.$color-text-primary;
+}
+
+.specs {
+  @include m.flex-column;
+  gap: t.$space-md;
+}
+
+.list {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: t.$space-sm 0;
+  border-bottom: t.$border-width solid t.$color-border;
+  gap: t.$space-md;
+}
+
+.label {
+  font-size: t.$font-size-sm;
+  color: t.$color-text-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.value {
+  font-size: t.$font-size-sm;
+  color: t.$color-text-primary;
+  text-align: right;
+}
+
+.additionalInfo {
+  margin-top: t.$space-2xl;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: t.$space-2xl;
+  align-items: start;
+
+  @include m.desktop {
+    width: t.$max-width;
+  }
+}

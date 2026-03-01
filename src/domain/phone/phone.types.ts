@@ -30,11 +30,11 @@ export interface PhoneListItem {
   imageUrl: string;
 }
 
-export interface PhoneDetail extends PhoneListItem {
+export interface PhoneDetail extends Omit<PhoneListItem, 'imageUrl'> {
   description: string;
   rating: number;
   specs: PhoneSpecs;
   colorOptions: ColorOption[];
   storageOptions: StorageOption[];
-  similarPhones: PhoneListItem[];
+  similarProducts: PhoneListItem[];
 }

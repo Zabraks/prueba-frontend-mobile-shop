@@ -1,0 +1,25 @@
+@use '@/styles/tokens' as t;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.option {
+  padding: t.$space-md t.$space-lg;
+  font-family: t.$font-family;
+  font-size: t.$font-size-sm;
+  border: t.$border-width solid t.$border-color;
+  background-color: t.$color-background;
+  color: t.$color-text-primary;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: t.$color-text-primary;
+  }
+}
+
+.selected {
+  border-color: t.$color-text-primary;
+}
