@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './Navbar.module.scss';
 import { LogoIcon } from '@/assets/icons/LogoIcon';
 import { ROUTES } from '@/lib/routes';
+import { LoadingBar } from './LoadingBar/LoadingBar';
 import { NAVBAR_STRINGS } from './constants';
 
 import { CartLink } from './CartLink/CartLink';
@@ -15,6 +16,7 @@ export const Navbar = () => {
         </Link>
         <CartLink />
       </nav>
+      <LoadingBar />
     </header>
   );
 };

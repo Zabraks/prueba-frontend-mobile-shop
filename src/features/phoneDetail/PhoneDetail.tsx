@@ -19,8 +19,6 @@ interface PhoneDetailProps {
 }
 
 export const PhoneDetail = ({ data }: PhoneDetailProps) => {
-  console.log('PhoneDetail render', data);
-
   const { addItem } = useCartContext();
 
   const [currentOption, setCurrentOption] = useState<Omit<CartItem, 'id'>>({

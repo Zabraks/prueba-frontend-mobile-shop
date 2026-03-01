@@ -1,16 +1,27 @@
 import { render, screen } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navbar } from './Navbar';
 import { ROUTES } from '@/lib/routes';
 import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
 import { CartProvider } from '@/context/CartContext/CartContext';
 import { mockCart } from '@/mocks/cart.mock';
 
-const renderWithCart = (ui: React.ReactElement) => render(<CartProvider>{ui}</CartProvider>);
+const createWrapper = () => {
+  const queryClient = new QueryClient();
+  const TestWrapper = ({ children }: { children: React.ReactNode }) => (
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>{children}</CartProvider>
+    </QueryClientProvider>
+  );
+  return TestWrapper;
+};
+
+const renderWithProviders = (ui: React.ReactElement) => render(ui, { wrapper: createWrapper() });
 
 describe('Navbar', () => {
   describe('rendering', () => {
     it('renders the logo', () => {
-      renderWithCart(<Navbar />);
+      renderWithProviders(<Navbar />);
 
       const logo = screen.getByLabelText(NAVBAR_STRINGS.logoAriaLabel);
 
@@ -18,7 +29,7 @@ describe('Navbar', () => {
     });
 
     it('renders the cart icon', () => {
-      renderWithCart(<Navbar />);
+      renderWithProviders(<Navbar />);
 
       const cartIcon = screen.getByLabelText(NAVBAR_STRINGS.cartAriaLabel(0));
 
@@ -26,7 +37,7 @@ describe('Navbar', () => {
     });
 
     it('displays 0 when the cart is empty', () => {
-      renderWithCart(<Navbar />);
+      renderWithProviders(<Navbar />);
 
       const cartNumber = screen.getByText('0');
 
@@ -36,7 +47,7 @@ describe('Navbar', () => {
 
   describe('navigation', () => {
     it('the logo links to /phones', () => {
-      renderWithCart(<Navbar />);
+      renderWithProviders(<Navbar />);
 
       const logoLink = screen.getByLabelText(NAVBAR_STRINGS.logoAriaLabel);
 
@@ -44,7 +55,7 @@ describe('Navbar', () => {
     });
 
     it('the cart links to /cart', () => {
-      renderWithCart(<Navbar />);
+      renderWithProviders(<Navbar />);
 
       const cartLink = screen.getByLabelText(NAVBAR_STRINGS.cartAriaLabel(0));
 
@@ -55,7 +66,7 @@ describe('Navbar', () => {
   describe('accessibility', () => {
     it('the cart aria-label reflects the item count', () => {
       localStorage.setItem('cart', JSON.stringify(mockCart));
-      renderWithCart(<Navbar />);
+      renderWithProviders(<Navbar />);
 
       const cartIcon = screen.getByLabelText(NAVBAR_STRINGS.cartAriaLabel(mockCart.length));
 
@@ -63,7 +74,7 @@ describe('Navbar', () => {
     });
 
     it('has a nav element with aria-label', () => {
-      renderWithCart(<Navbar />);
+      renderWithProviders(<Navbar />);
 
       const nav = screen.getByRole('navigation', { name: NAVBAR_STRINGS.mainNavigationLabel });
 
