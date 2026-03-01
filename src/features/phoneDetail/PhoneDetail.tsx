@@ -12,13 +12,18 @@ import { Button } from '@/ui/Button/Button';
 import { ROUTES } from '@/lib/routes';
 import styles from './PhoneDetail.module.scss';
 import { PHONE_DETAIL_STRINGS } from './constants';
+import { useCartContext } from '@/context/CartContext';
 
 interface PhoneDetailProps {
   data: PhoneDetailType;
 }
 
 export const PhoneDetail = ({ data }: PhoneDetailProps) => {
-  const [currentOption, setCurrentOption] = useState<CartItem>({
+  console.log('PhoneDetail render', data);
+
+  const { addItem } = useCartContext();
+
+  const [currentOption, setCurrentOption] = useState<Omit<CartItem, 'id'>>({
     name: data.name,
     price: data.basePrice,
     img: data.colorOptions[0].imageUrl,
@@ -39,6 +44,17 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
       selectedStorage: storage.capacity,
       price: storage.price,
     }));
+  };
+
+  const handleAddToCart = () => {
+    if (!currentOption.selectedStorage || !currentOption.selectedColor) return;
+
+    const newCartItem: CartItem = {
+      ...currentOption,
+      id: crypto.randomUUID(),
+    };
+
+    addItem(newCartItem);
   };
 
   const canAddToCart = useMemo(
@@ -98,9 +114,13 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
             <Button
               fullWidth
               disabled={!canAddToCart}
-              // aria-label={
-              //   canAddToCart ? `Add ${phone.name} to cart` : 'Select storage and color to add to cart'
-              // }
+              onClick={handleAddToCart}
+              // TODO: meter en strings
+              aria-label={
+                canAddToCart
+                  ? `Add ${data.name} to cart`
+                  : 'Select storage and color to add to cart'
+              }
             >
               {PHONE_DETAIL_STRINGS.addToCart}
             </Button>

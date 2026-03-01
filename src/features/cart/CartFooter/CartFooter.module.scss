@@ -1,0 +1,45 @@
+@use '@/styles/tokens' as t;
+@use '@/styles/mixins' as m;
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: t.$space-lg 0;
+  border-top: t.$border-width solid t.$color-border;
+  margin-top: t.$space-xl;
+
+  @include m.mobile {
+    flex-direction: column;
+    gap: t.$space-md;
+
+    a,
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: t.$space-lg;
+
+  @include m.mobile {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+}
+
+.total {
+  display: flex;
+  gap: t.$space-sm;
+  font-size: t.$font-size-sm;
+  color: t.$color-text-secondary;
+
+  strong {
+    color: t.$color-text-primary;
+    font-weight: t.$font-weight-bold;
+  }
+}

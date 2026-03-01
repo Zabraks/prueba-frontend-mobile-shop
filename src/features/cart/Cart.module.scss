@@ -1,0 +1,22 @@
+@use '@/styles/tokens' as t;
+@use '@/styles/mixins' as m;
+
+.wrapper {
+  @include m.container;
+  padding-top: t.$space-lg;
+  padding-bottom: t.$space-2xl;
+  min-height: calc(100vh - t.$navbar-height);
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: t.$font-size-md;
+  font-weight: t.$font-weight-bold;
+  letter-spacing: 0.5px;
+  margin-bottom: t.$space-lg;
+}
+
+.list {
+  flex: 1;
+}
