@@ -1,0 +1,37 @@
+@use '@/styles/tokens' as t;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: t.$space-sm;
+}
+
+.options {
+  display: flex;
+  gap: t.$space-md;
+}
+
+//TODO: refactor
+.option {
+  width: 24px;
+  height: 24px;
+  border: t.$border-width solid t.$color-border;
+  cursor: pointer;
+  padding: 0;
+  transition: outline 0.15s ease;
+  &:hover {
+    outline: 2px solid t.$color-text-primary;
+    outline-offset: 2px;
+  }
+}
+
+.selected {
+  outline: 2px solid t.$color-text-primary;
+  outline-offset: 2px;
+}
+
+.label {
+  font-size: t.$font-size-sm;
+  font-weight: t.$font-weight-light;
+  color: t.$color-text-primary;
+}

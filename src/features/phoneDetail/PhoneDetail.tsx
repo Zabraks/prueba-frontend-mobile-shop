@@ -1,0 +1,126 @@
+'use client';
+
+import { useState, useMemo } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { PhoneDetail as PhoneDetailType } from '@/domain/phone/phone.types';
+import { CartItem } from '@/domain/cart/cart.types';
+import { SimilarProducts } from '@/features/phoneDetail/SimilarProducts/SimilarProducts';
+import { StorageSelector } from '@/features/phoneDetail/StorageSelector/StorageSelector';
+import { ColorSelector } from '@/features/phoneDetail/ColorSelector/ColorSelector';
+import { Button } from '@/ui/Button/Button';
+import { ROUTES } from '@/lib/routes';
+import styles from './PhoneDetail.module.scss';
+import { PHONE_DETAIL_STRINGS } from './constants';
+
+interface PhoneDetailProps {
+  data: PhoneDetailType;
+}
+
+export const PhoneDetail = ({ data }: PhoneDetailProps) => {
+  const [currentOption, setCurrentOption] = useState<CartItem>({
+    name: data.name,
+    price: data.basePrice,
+    img: data.colorOptions[0].imageUrl,
+    selectedColor: data.colorOptions[0].name,
+  });
+
+  const handleColorChange = (option) => {
+    setCurrentOption((prev) => ({
+      ...prev,
+      img: option.imageUrl,
+      selectedColor: option.name,
+    }));
+  };
+
+  const handleStorageChange = (storage) => {
+    setCurrentOption((prev) => ({
+      ...prev,
+      selectedStorage: storage.capacity,
+      price: storage.price,
+    }));
+  };
+
+  const canAddToCart = useMemo(
+    () => currentOption.selectedColor && currentOption.selectedStorage,
+    [currentOption]
+  );
+
+  return (
+    <div className={styles.wrapper}>
+      <Link
+        href={ROUTES.phones}
+        className={styles.back}
+        aria-label={PHONE_DETAIL_STRINGS.backAriaLabel}
+      >
+        <span>‹</span>
+        {PHONE_DETAIL_STRINGS.back}
+      </Link>
+      <div className={styles.content}>
+        <div className={styles.mainContent}>
+          <div className={styles.imageWrapper}>
+            <Image
+              src={currentOption.img}
+              alt={PHONE_DETAIL_STRINGS.imageAlt(data.name)}
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className={styles.image}
+              priority
+            />
+          </div>
+          <div className={styles.infoWrapper}>
+            <div className={styles.info}>
+              {/* //TODO: ojo importante, quitar todos los toUpperCase, revisar si son aplicables para toda la app, hacer un mapper en el api con esa transformación */}
+              <h1 className={styles.name}>{data.name.toUpperCase()}</h1>
+              <span className={styles.price}>
+                {currentOption.price} {PHONE_DETAIL_STRINGS.currency}
+              </span>
+            </div>
+            <div className={styles.selectors}>
+              <div className={styles.section}>
+                <p className={styles.sectionLabel}>{PHONE_DETAIL_STRINGS.storageLabel}</p>
+                <StorageSelector
+                  options={data.storageOptions}
+                  selected={currentOption.selectedStorage}
+                  onChange={handleStorageChange}
+                />
+              </div>
+
+              <div className={styles.section}>
+                <p className={styles.sectionLabel}>{PHONE_DETAIL_STRINGS.colorLabel}</p>
+                <ColorSelector
+                  colors={data.colorOptions}
+                  selected={currentOption.selectedColor}
+                  onChange={handleColorChange}
+                />
+              </div>
+            </div>
+            <Button
+              fullWidth
+              disabled={!canAddToCart}
+              // aria-label={
+              //   canAddToCart ? `Add ${phone.name} to cart` : 'Select storage and color to add to cart'
+              // }
+            >
+              {PHONE_DETAIL_STRINGS.addToCart}
+            </Button>
+          </div>
+        </div>
+        <div className={styles.additionalInfo}>
+          <div className={styles.specs}>
+            <h2 className={styles.title}>{PHONE_DETAIL_STRINGS.specsTitle}</h2>
+            <dl className={styles.list}>
+              {Object.entries(data.specs).map(([key, value]) => (
+                <div key={key} className={styles.row}>
+                  <dt className={styles.label}>{key}</dt>
+                  <dd className={styles.value}>{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <SimilarProducts phones={data.similarProducts} />
+        </div>
+      </div>
+    </div>
+  );
+};
