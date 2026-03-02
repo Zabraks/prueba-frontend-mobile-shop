@@ -84,8 +84,7 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
           </div>
           <div className={styles.infoWrapper}>
             <div className={styles.info}>
-              {/* //TODO: ojo importante, quitar todos los toUpperCase, revisar si son aplicables para toda la app, hacer un mapper en el api con esa transformación */}
-              <h1 className={styles.name}>{data.name.toUpperCase()}</h1>
+              <h1 className={styles.name}>{data.name}</h1>
               <span className={styles.price}>
                 {currentOption.price} {PHONE_DETAIL_STRINGS.currency}
               </span>

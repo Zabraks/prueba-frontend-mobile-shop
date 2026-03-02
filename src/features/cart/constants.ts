@@ -1,3 +1,3 @@
 export const CART_STRINGS = {
-  title: (count: number) => `CART (${count})`,
+  title: (count: number) => `Cart (${count})`,
 } as const;

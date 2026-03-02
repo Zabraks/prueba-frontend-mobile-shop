@@ -1,4 +1,4 @@
 export const SIMILAR_PRODUCTS_STRINGS = {
-  title: 'SIMILAR PRODUCTS',
+  title: 'Similar products',
   gridAriaLabel: 'Similar products',
 } as const;

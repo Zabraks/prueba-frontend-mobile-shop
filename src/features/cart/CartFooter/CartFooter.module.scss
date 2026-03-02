@@ -2,9 +2,11 @@
 @use '@/styles/mixins' as m;
 
 .footer {
-  //TODO: REVISAR
-  @include m.flex-column;
+  //TODO: REVISAR PARA REFACTOR
+  display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+
   align-items: center;
   padding: t.$space-lg 0;
   margin-top: t.$space-xl;
@@ -17,47 +19,65 @@
     line-height: t.$space-md;
   }
 
-  @include m.mobile {
-    flex-wrap: wrap;
-    flex-direction: row;
+  .total {
+    display: flex;
+    order: -1;
+    width: 100%;
+    justify-content: space-between;
+    font-size: t.$font-size-md;
+    color: t.$color-text-primary;
+    font-weight: t.$font-weight-regular;
+    text-transform: uppercase;
+    gap: t.$space-sm;
+  }
 
-    .total {
-      order: -1;
+  a {
+    order: 0;
+    flex: 1;
+    width: 50%;
+    button {
       width: 100%;
-      justify-content: space-between;
-      font-size: t.$font-size-md;
-      color: t.$color-text-primary;
-      font-weight: t.$font-weight-regular;
-    }
-
-    a {
-      order: 0;
-      flex: 1;
-      width: 50%;
-      button {
-        width: 100%;
-      }
-    }
-
-    button[id='cart-pay'] {
-      order: 1;
-      flex: 1;
     }
   }
 
+  button[id='cart-pay'] {
+    order: 1;
+    flex: 1;
+  }
+
   @include m.tablet {
-    flex-wrap: nowrap;
-    flex-direction: row;
     justify-content: space-between;
+    a {
+      flex: none;
+      width: auto;
+      button {
+        width: 260px;
+      }
+    }
+
+    button {
+      font-size: t.$font-size-sm;
+      padding: t.$space-md t.$space-lg;
+      line-height: t.$space-md;
+      width: 260px;
+    }
+  }
+
+  @include m.desktop {
+    flex-wrap: nowrap;
     gap: t.$space-3xl;
     .total {
       order: 0;
-      width: 100%;
       justify-content: flex-end;
+      width: 55%;
     }
 
     a {
       flex: none;
+      width: auto;
+      button {
+        width: 260px;
+      }
     }
 
     button {
@@ -71,10 +91,4 @@
       flex: none;
     }
   }
-}
-
-.total {
-  display: flex;
-  align-items: center;
-  gap: t.$space-sm;
 }

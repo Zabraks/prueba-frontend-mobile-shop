@@ -17,6 +17,8 @@ $border: t.$border-width solid t.$color-border;
 }
 
 .item {
+  display: flex;
+  flex-direction: column;
   background-color: t.$color-background;
   border: $border;
   margin-left: -(t.$border-width);
@@ -30,10 +32,10 @@ $border: t.$border-width solid t.$color-border;
 
 .grid[data-variant='extended'] {
   @include m.tablet {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @include m.desktop {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }

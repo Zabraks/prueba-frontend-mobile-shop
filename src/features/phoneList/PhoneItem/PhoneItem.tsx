@@ -29,8 +29,8 @@ export const PhoneItem = ({ phone, priority }: PhoneItemProps) => {
         </div>
         <div className={styles.info}>
           <div className={styles.left}>
-            <span className={styles.brand}>{brand.toUpperCase()}</span>
-            <span className={styles.name}>{name.toUpperCase()}</span>
+            <span className={styles.brand}>{brand}</span>
+            <span className={styles.name}>{name}</span>
           </div>
           <span className={styles.price}>
             {basePrice} {PHONE_CARD_STRINGS.currency}

@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { PhoneDetail } from '@/features/phoneDetail/PhoneDetail';
 import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
+import { SIMILAR_PRODUCTS_STRINGS } from './SimilarProducts/constants';
 import { mockPhoneDetail } from '@/mocks/phoneDetail.mock';
 import { CartProvider } from '@/context/CartContext/CartContext';
 
@@ -11,7 +12,7 @@ describe('PhoneDetail', () => {
     it('renders the phone name', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const name = screen.getByText(mockPhoneDetail.name.toUpperCase());
+      const name = screen.getByText(mockPhoneDetail.name);
 
       expect(name).toBeInTheDocument();
     });
@@ -19,7 +20,9 @@ describe('PhoneDetail', () => {
     it('renders the base price initially', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const price = screen.getByText(`${mockPhoneDetail.basePrice} EUR`);
+      const price = screen.getByText(
+        `${mockPhoneDetail.basePrice} ${PHONE_DETAIL_STRINGS.currency}`
+      );
 
       expect(price).toBeInTheDocument();
     });
@@ -107,7 +110,7 @@ describe('PhoneDetail', () => {
     it('renders specifications section', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const specsTitle = screen.getByText('SPECIFICATIONS');
+      const specsTitle = screen.getByText(PHONE_DETAIL_STRINGS.specsTitle);
 
       expect(specsTitle).toBeInTheDocument();
     });
@@ -128,7 +131,7 @@ describe('PhoneDetail', () => {
     it('renders similar products section', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const similarProductsTitle = screen.getByText('SIMILAR PRODUCTS');
+      const similarProductsTitle = screen.getByText(SIMILAR_PRODUCTS_STRINGS.title);
 
       expect(similarProductsTitle).toBeInTheDocument();
     });
@@ -136,7 +139,7 @@ describe('PhoneDetail', () => {
     it('renders all similar products', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
       mockPhoneDetail.similarProducts.forEach((product) => {
-        const productName = screen.getByText(product.name.toUpperCase());
+        const productName = screen.getByText(product.name);
 
         expect(productName).toBeInTheDocument();
       });

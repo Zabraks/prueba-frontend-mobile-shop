@@ -16,7 +16,7 @@
   color: t.$color-text-primary;
   margin-bottom: t.$space-lg;
   letter-spacing: 0.5px;
-
+  text-transform: uppercase;
   & span {
     font-size: t.$font-size-md;
   }
@@ -71,6 +71,7 @@
 .info {
   @include m.flex-column;
   gap: t.$space-sm;
+  text-transform: uppercase;
 }
 
 .name {
@@ -98,11 +99,13 @@
 .sectionLabel {
   font-size: t.$font-size-sm;
   color: t.$color-text-primary;
+  text-transform: uppercase;
 }
 
 .specs {
   @include m.flex-column;
   gap: t.$space-md;
+  text-transform: uppercase;
 }
 
 .list {

@@ -62,7 +62,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const totalItems = state.items.length;
 
-  const totalPrice = state.items.reduce((acc, item) => acc + item.price, 0);
+  const totalPrice = Number(state.items.reduce((acc, item) => acc + item.price, 0).toFixed(2));
 
   const isInCart = (phoneId: string) => state.items.some((item) => item.id === phoneId);
 

@@ -16,7 +16,7 @@ describe('PhoneItem', () => {
     it('renders the phone brand in uppercase', () => {
       render(<PhoneItem phone={mockPhone} />);
 
-      const brand = screen.getByText(mockPhone.brand.toUpperCase());
+      const brand = screen.getByText(mockPhone.brand);
 
       expect(brand).toBeInTheDocument();
     });
@@ -24,7 +24,7 @@ describe('PhoneItem', () => {
     it('renders the phone name in uppercase', () => {
       render(<PhoneItem phone={mockPhone} />);
 
-      const name = screen.getByText(mockPhone.name.toUpperCase());
+      const name = screen.getByText(mockPhone.name);
 
       expect(name).toBeInTheDocument();
     });
