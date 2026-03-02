@@ -144,4 +144,24 @@ describe('PhoneDetail', () => {
       });
     });
   });
+
+  describe('add to cart functionality', () => {
+    it('adds item to cart when button is clicked with valid selection', () => {
+      renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
+
+      const storageOption = screen.getByText(mockPhoneDetail.storageOptions[0].capacity);
+      fireEvent.click(storageOption);
+
+      const addToCartButton = screen.getByRole('button', {
+        name: PHONE_DETAIL_STRINGS.addToCart(mockPhoneDetail.name),
+      });
+      fireEvent.click(addToCartButton);
+
+      const stored = JSON.parse(localStorage.getItem(APP_CONFIG.cartStorageKey) ?? '[]');
+      expect(stored).toHaveLength(1);
+      expect(stored[0].name).toBe(mockPhoneDetail.name);
+      expect(stored[0].selectedStorage).toBe(mockPhoneDetail.storageOptions[0].capacity);
+      expect(stored[0].selectedColor).toBe(mockPhoneDetail.colorOptions[0].name);
+    });
+  });
 });

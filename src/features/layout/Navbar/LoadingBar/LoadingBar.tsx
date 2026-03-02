@@ -1,5 +1,5 @@
 'use client';
-import { useNavigationProgress } from '@/hooks/useNavigationProgress';
+import { useNavigationProgress } from '@/hooks/useNavigationProgress/useNavigationProgress';
 import styles from './LoadingBar.module.scss';
 import { LOADING_BAR_STRINGS } from './constants';
 

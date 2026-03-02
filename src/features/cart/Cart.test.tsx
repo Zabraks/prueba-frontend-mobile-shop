@@ -4,6 +4,8 @@ import { CartProvider } from '@/context/CartContext/CartContext';
 import { CART_STRINGS } from '@/features/cart/constants';
 import { CART_ITEM_STRINGS } from '@/features/cart/CartItem/constants';
 import { mockCart } from '@/mocks/cart.mock';
+import { CART_FOOTER_STRINGS } from './CartFooter/constants';
+import { APP_CONFIG } from '@/config/app';
 
 const renderCart = () =>
   render(
@@ -45,7 +47,7 @@ describe('Cart', () => {
 
   describe('with items', () => {
     beforeEach(() => {
-      localStorage.setItem('cart', JSON.stringify(mockCart));
+      localStorage.setItem(APP_CONFIG.cartStorageKey, JSON.stringify(mockCart));
     });
 
     it('renders the cart title with item count', () => {
@@ -74,6 +76,9 @@ describe('Cart', () => {
 
     it('removes item when remove is clicked', () => {
       renderCart();
+      const initTitle = screen.getByText(CART_STRINGS.title(mockCart.length));
+      expect(initTitle).toBeInTheDocument();
+
       const removeButton = screen.getByRole('button', {
         name: CART_ITEM_STRINGS.removeAriaLabel(mockCart[0].name),
       });
@@ -83,6 +88,23 @@ describe('Cart', () => {
       const title = screen.getByText(CART_STRINGS.title(mockCart.length - 1));
 
       expect(title).toBeInTheDocument();
+    });
+
+    it('should clear all items when pay button is clicked', async () => {
+      renderCart();
+      const initTitle = screen.getByText(CART_STRINGS.title(mockCart.length));
+      expect(initTitle).toBeInTheDocument();
+
+      const payButton = screen.getByRole('button', {
+        name: CART_FOOTER_STRINGS.pay,
+      });
+      fireEvent.click(payButton);
+
+      const title = screen.getByText(CART_STRINGS.title(0));
+      expect(title).toBeInTheDocument();
+
+      const articles = screen.queryAllByRole('article');
+      expect(articles).toHaveLength(0);
     });
   });
 });

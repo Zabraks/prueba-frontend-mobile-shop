@@ -9,6 +9,20 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./vitest.setup.tsx'],
     exclude: ['tests/**', 'node_modules/**'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.d.ts',
+        'src/**/*.module.scss',
+        'src/styles/**',
+        'src/mocks/**',
+        'src/app/**',
+        'src/domain/**',
+        'src/lib/**',
+        'src/services/**',
+      ],
+    },
   },
   resolve: {
     alias: {

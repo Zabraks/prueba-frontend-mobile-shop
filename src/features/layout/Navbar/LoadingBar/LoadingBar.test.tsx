@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { useNavigationProgress } from '@/hooks/useNavigationProgress';
+import { useNavigationProgress } from '@/hooks/useNavigationProgress/useNavigationProgress';
 import { LoadingBar } from './LoadingBar';
 
-vi.mock('@/hooks/useNavigationProgress', () => ({
+vi.mock('@/hooks/useNavigationProgress/useNavigationProgress', () => ({
   useNavigationProgress: vi.fn(),
 }));
 
