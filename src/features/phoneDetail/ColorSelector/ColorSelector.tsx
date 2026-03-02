@@ -1,4 +1,4 @@
-import { ColorOption } from '@/domain/phone/phone.types';
+import type { ColorOption } from '@/domain/phone/phone.types';
 import styles from './ColorSelector.module.scss';
 import { COLOR_SELECTOR_STRINGS } from './constants';
 

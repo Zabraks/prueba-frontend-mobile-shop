@@ -6,7 +6,7 @@ import { useDebounce } from '@/hooks/useDebounce/useDebounce';
 import styles from './PhoneList.module.scss';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { Grid } from '@/ui/Grid/Grid';
-import { PhoneListItem } from '@/domain/phone/phone.types';
+import type { PhoneListItem } from '@/domain/phone/phone.types';
 import { PhoneItem } from '@/features/phoneList/PhoneItem/PhoneItem';
 import { PHONE_LIST_STRINGS } from './constants';
 

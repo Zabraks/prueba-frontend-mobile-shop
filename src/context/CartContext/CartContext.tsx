@@ -1,7 +1,8 @@
 'use client';
 
-import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { CartItem } from '@/domain/cart/cart.types';
+import { createContext, useContext, useReducer, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import type { CartItem } from '@/domain/cart/cart.types';
 
 interface CartState {
   items: CartItem[];

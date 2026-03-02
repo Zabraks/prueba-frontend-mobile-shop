@@ -1,4 +1,4 @@
-import { PhoneListItem } from '@/domain/phone/phone.types';
+import type { PhoneListItem } from '@/domain/phone/phone.types';
 
 export const mockPhoneList: PhoneListItem[] = [
   {

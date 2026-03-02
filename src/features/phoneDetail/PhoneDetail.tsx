@@ -3,8 +3,8 @@
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PhoneDetail as PhoneDetailType } from '@/domain/phone/phone.types';
-import { CartItem } from '@/domain/cart/cart.types';
+import type { PhoneDetail as PhoneDetailType } from '@/domain/phone/phone.types';
+import type { CartItem } from '@/domain/cart/cart.types';
 import { SimilarProducts } from '@/features/phoneDetail/SimilarProducts/SimilarProducts';
 import { StorageSelector } from '@/features/phoneDetail/StorageSelector/StorageSelector';
 import { ColorSelector } from '@/features/phoneDetail/ColorSelector/ColorSelector';

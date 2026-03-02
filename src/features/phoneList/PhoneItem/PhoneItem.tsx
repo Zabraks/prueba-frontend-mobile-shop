@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { PhoneListItem } from '@/domain/phone/phone.types';
+import type { PhoneListItem } from '@/domain/phone/phone.types';
 import { ROUTES } from '@/lib/routes';
 import { PHONE_CARD_STRINGS } from './constants';
 import styles from './PhoneItem.module.scss';

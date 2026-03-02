@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { CartItem as CartItemType } from '@/domain/cart/cart.types';
+import type { CartItem as CartItemType } from '@/domain/cart/cart.types';
 import { Button } from '@/ui/Button/Button';
 import { CART_ITEM_STRINGS } from './constants';
 import styles from './CartItem.module.scss';

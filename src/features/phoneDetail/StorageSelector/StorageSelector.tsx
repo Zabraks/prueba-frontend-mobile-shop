@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { OptionSelector } from '@/ui/OptionSelector/OptionSelector';
-import { StorageOption } from '@/domain/phone/phone.types';
+import type { StorageOption } from '@/domain/phone/phone.types';
 import { STORAGE_SELECTOR_STRINGS } from './constants';
 interface StorageSelectorProps {
   options: StorageOption[];

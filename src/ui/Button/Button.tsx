@@ -11,10 +11,12 @@ export const Button = ({
   fullWidth = false,
   children,
   className,
+  type,
   ...props
 }: ButtonProps) => {
   return (
     <button
+      type={type === 'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'}
       className={[
         styles.button,
         styles[variant],
