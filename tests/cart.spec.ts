@@ -53,9 +53,15 @@ test.describe('Cart', () => {
 
       await firstPhone.click();
 
+      await page.waitForURL(/\/phones\/.+/);
+
       const storageOption = page.getByRole('group', { name: STORAGE_SELECTOR_STRINGS.ariaLabel });
       const colorOption = page.getByRole('group', { name: COLOR_SELECTOR_STRINGS.ariaLabel });
-      const headerName = await page.getByRole('heading', { level: 1 }).textContent();
+      const heading = page.getByRole('heading', { level: 1 });
+
+      await expect(heading).toBeVisible();
+
+      const headerName = await heading.textContent();
 
       await storageOption.getByRole('button').first().click();
       await colorOption.getByRole('button').first().click();

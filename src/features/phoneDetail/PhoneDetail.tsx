@@ -18,12 +18,15 @@ import styles from './PhoneDetail.module.scss';
 import { PHONE_DETAIL_STRINGS } from './constants';
 import { useCartContext } from '@/context/CartContext/CartContext';
 import { APP_CONFIG } from '@/config/app';
+import { useRouter } from 'next/navigation';
 
 interface PhoneDetailProps {
   data: PhoneDetailType;
 }
 
 export const PhoneDetail = ({ data }: PhoneDetailProps) => {
+  const router = useRouter();
+
   const { addItem } = useCartContext();
 
   const [currentOption, setCurrentOption] = useState<Omit<CartItem, 'id'>>({
@@ -32,6 +35,15 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
     img: data.colorOptions[0].imageUrl,
     selectedColor: data.colorOptions[0].name,
   });
+
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (document.referrer.includes(window.location.origin)) {
+      router.back();
+    } else {
+      router.push(ROUTES.phones);
+    }
+  };
 
   const handleColorChange = (option: ColorOption) => {
     setCurrentOption((prev) => ({
@@ -69,6 +81,7 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
     <div className={styles.wrapper}>
       <Link
         href={ROUTES.phones}
+        onClick={handleBack}
         className={styles.back}
         aria-label={PHONE_DETAIL_STRINGS.backAriaLabel}
       >

@@ -3,5 +3,5 @@ export const API_CONFIG = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY ?? '',
   defaultLimit: 20,
   minSearchLength: 3,
-  debounceDelay: 300,
+  debounceDelay: 500,
 } as const;

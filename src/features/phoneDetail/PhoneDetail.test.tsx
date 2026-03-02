@@ -6,6 +6,10 @@ import { mockPhoneDetail } from '@/mocks/phoneDetail.mock';
 import { CartProvider } from '@/context/CartContext/CartContext';
 import { APP_CONFIG } from '@/config/app';
 
+vi.mock('next/navigation', () => ({
+  useRouter: vi.fn(() => ({ replace: vi.fn() })),
+}));
+
 const renderWithCart = (ui: React.ReactElement) => render(<CartProvider>{ui}</CartProvider>);
 
 describe('PhoneDetail', () => {

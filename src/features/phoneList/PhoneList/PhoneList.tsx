@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { usePhoneList } from '@/hooks/usePhoneList';
 import { useDebounce } from '@/hooks/useDebounce/useDebounce';
 import styles from './PhoneList.module.scss';
@@ -15,8 +16,23 @@ interface PhoneListProps {
 }
 
 export const PhoneList = ({ initialPhones }: PhoneListProps) => {
-  const [search, setSearch] = useState('');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get('search') ?? '');
   const debouncedSearch = useDebounce(search);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (debouncedSearch) {
+      params.set('search', debouncedSearch);
+    } else {
+      params.delete('search');
+    }
+
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }, [debouncedSearch, pathname, router, searchParams]);
 
   const { data: phones = initialPhones, isError } = usePhoneList(
     initialPhones,
