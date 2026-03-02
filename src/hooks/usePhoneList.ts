@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { phoneService } from '@/services/phone/phoneService';
-import type { FetchPhonesListParams } from '@/services/phone/phone.types';
+import type { FetchPhonesListParams } from '@/services/phone/phone.api.types';
 import type { PhoneListItem } from '@/domain/phone/phone.types';
 
 export const phoneKeys = {

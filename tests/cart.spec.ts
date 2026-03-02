@@ -56,7 +56,7 @@ test.describe('Cart', () => {
       await storageOption.getByRole('button').first().click();
       await colorOption.getByRole('button').first().click();
 
-      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCart(headerName) });
+      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCart(headerName!) });
 
       await addToCartButton.click();
       await page.goto('/cart');
@@ -89,7 +89,7 @@ test.describe('Cart', () => {
     test('removes item when eliminar is clicked', async ({ page }) => {
       const phoneItem = page.getByRole('article');
       const phoneName = await phoneItem.getAttribute('aria-label');
-      const removeButton = page.getByRole('button', { name: CART_ITEM_STRINGS.removeAriaLabel(phoneName) });
+      const removeButton = page.getByRole('button', { name: CART_ITEM_STRINGS.removeAriaLabel(phoneName!) });
 
       await removeButton.click();
       await expect(page.getByText(CART_STRINGS.title(0))).toBeVisible();

@@ -4,7 +4,7 @@ import { COLOR_SELECTOR_STRINGS } from './constants';
 
 interface ColorSelectorProps {
   colors: ColorOption[];
-  selected: string | null;
+  selected?: string;
   onChange: (option: ColorOption) => void;
 }
 

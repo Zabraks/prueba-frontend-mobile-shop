@@ -6,7 +6,7 @@ import styles from './CartItem.module.scss';
 
 interface CartItemProps {
   item: CartItemType;
-  onRemove: (phoneId: string) => void;
+  onRemove: () => void;
 }
 
 export const CartItem = ({ item, onRemove }: CartItemProps) => {
@@ -22,7 +22,7 @@ export const CartItem = ({ item, onRemove }: CartItemProps) => {
           <div className={styles.phone}>
             <p>{name}</p>
             <p>
-              {selectedStorage} {CART_ITEM_STRINGS.specseparator} {selectedColor}
+              {selectedStorage} {CART_ITEM_STRINGS.specsseparator} {selectedColor}
             </p>
           </div>
           <p>
@@ -32,7 +32,7 @@ export const CartItem = ({ item, onRemove }: CartItemProps) => {
         <Button
           className={styles.removeButton}
           variant="danger"
-          onClick={() => onRemove(item.id)}
+          onClick={onRemove}
           aria-label={CART_ITEM_STRINGS.removeAriaLabel(name)}
         >
           {CART_ITEM_STRINGS.remove}

@@ -1,9 +1,14 @@
 import { httpClient } from '../http/httpClient';
-import type { FetchPhonesListParams } from '@/services/phone/phone.types';
+import type {
+  FetchPhonesListParams,
+  ApiPhone,
+  ApiPhoneDetail as ApiPhoneDetailType,
+} from '@/services/phone/phone.api.types';
 import type { PhoneListItem, PhoneDetail } from '@/domain/phone/phone.types';
+import { mapPhone, mapPhoneDetail } from './phone.mapper';
 
 export const phoneService = {
-  getPhoneList: ({ search, limit = 20, offset }: FetchPhonesListParams = {}): Promise<
+  getPhoneList: async ({ search, limit = 20, offset }: FetchPhonesListParams = {}): Promise<
     PhoneListItem[]
   > => {
     const queryParams = new URLSearchParams();
@@ -13,7 +18,12 @@ export const phoneService = {
     if (offset) queryParams.append('offset', String(offset));
 
     const query = `?${queryParams.toString()}` || '';
-    return httpClient(`/products${query}`);
+    const apiPhones = await httpClient<ApiPhone[]>(`/products${query}`);
+
+    return apiPhones.map(mapPhone);
   },
-  getPhoneById: (id: string): Promise<PhoneDetail> => httpClient(`/products/${id}`),
+  getPhoneById: async (id: string): Promise<PhoneDetail> => {
+    const apiPhoneDetail = await httpClient<ApiPhoneDetailType>(`/products/${id}`);
+    return mapPhoneDetail(apiPhoneDetail);
+  },
 };

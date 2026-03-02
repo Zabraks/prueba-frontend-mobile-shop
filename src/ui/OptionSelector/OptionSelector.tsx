@@ -1,14 +1,14 @@
 import styles from './OptionSelector.module.scss';
 
-interface Option {
+export interface SelectorOption {
   label: string;
   value: string;
 }
 
 interface OptionSelectorProps {
-  options: Option[];
-  selected: string | null;
-  onChange: (value: string) => void;
+  options: SelectorOption[];
+  selected?: string | null;
+  onChange: (option: SelectorOption) => void;
   ariaLabel: string;
 }
 

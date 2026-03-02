@@ -22,8 +22,8 @@ describe('CartItem', () => {
     it('renders selected storage and color', () => {
       render(<CartItem item={itemMocked} onRemove={mockOnRemove} />);
 
-      const storage = screen.getByText(new RegExp(itemMocked.selectedStorage));
-      const color = screen.getByText(new RegExp(itemMocked.selectedColor));
+      const storage = screen.getByText(new RegExp(itemMocked.selectedStorage!));
+      const color = screen.getByText(new RegExp(itemMocked.selectedColor!));
 
       expect(storage).toBeInTheDocument();
       expect(color).toBeInTheDocument();
@@ -65,7 +65,7 @@ describe('CartItem', () => {
       });
 
       fireEvent.click(removeButton);
-      expect(mockOnRemove).toHaveBeenCalledWith(itemMocked.id);
+      expect(mockOnRemove).toHaveBeenCalled();
     });
   });
 

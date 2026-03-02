@@ -24,6 +24,21 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+const isCartItemArray = (data: unknown): data is CartItem[] => {
+  return (
+    Array.isArray(data) &&
+    data.every(
+      (item) =>
+        typeof item === 'object' &&
+        item !== null &&
+        typeof item.id === 'string' &&
+        typeof item.name === 'string' &&
+        typeof item.price === 'number' &&
+        typeof item.img === 'string'
+    )
+  );
+};
+
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case 'HYDRATE':
@@ -46,7 +61,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     try {
       const stored = localStorage.getItem('cart');
       if (stored) {
-        dispatch({ type: 'HYDRATE', payload: JSON.parse(stored) });
+        const parsed: unknown = JSON.parse(stored);
+        if (isCartItemArray(parsed)) {
+          dispatch({ type: 'HYDRATE', payload: parsed });
+        } else {
+          localStorage.removeItem('cart');
+        }
       }
     } catch {
       localStorage.removeItem('cart');

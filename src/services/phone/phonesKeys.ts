@@ -1,4 +1,4 @@
-import type { FetchPhonesListParams } from '@/services/phone/phone.types';
+import type { FetchPhonesListParams } from '@/services/phone/phone.api.types';
 
 export const phoneKeys = {
   all: ['phones'] as const,

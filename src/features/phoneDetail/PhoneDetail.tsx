@@ -3,7 +3,11 @@
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { PhoneDetail as PhoneDetailType } from '@/domain/phone/phone.types';
+import type {
+  PhoneDetail as PhoneDetailType,
+  ColorOption,
+  StorageOption,
+} from '@/domain/phone/phone.types';
 import type { CartItem } from '@/domain/cart/cart.types';
 import { SimilarProducts } from '@/features/phoneDetail/SimilarProducts/SimilarProducts';
 import { StorageSelector } from '@/features/phoneDetail/StorageSelector/StorageSelector';
@@ -28,7 +32,7 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
     selectedColor: data.colorOptions[0].name,
   });
 
-  const handleColorChange = (option) => {
+  const handleColorChange = (option: ColorOption) => {
     setCurrentOption((prev) => ({
       ...prev,
       img: option.imageUrl,
@@ -36,7 +40,7 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
     }));
   };
 
-  const handleStorageChange = (storage) => {
+  const handleStorageChange = (storage: StorageOption) => {
     setCurrentOption((prev) => ({
       ...prev,
       selectedStorage: storage.capacity,
