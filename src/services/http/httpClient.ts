@@ -1,10 +1,9 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+import { API_CONFIG } from '@/config/api';
 
 export const httpClient = async <T>(endpoint: string): Promise<T> => {
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
+  const response = await fetch(`${API_CONFIG.baseUrl}${endpoint}`, {
     headers: {
-      'x-api-key': API_KEY ?? '',
+      'x-api-key': API_CONFIG.apiKey ?? '',
       accept: 'application/json',
     },
   });

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import styles from './CartLink.module.scss';
 import { CartIcon } from '@/assets/icons/CartIcon';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
 import { CART_LINK_STRINGS } from './constants';
 import { useCartContext } from '@/context/CartContext/CartContext';
 

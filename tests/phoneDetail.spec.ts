@@ -4,6 +4,7 @@ import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
 import { STORAGE_SELECTOR_STRINGS } from '@/features/phoneDetail/StorageSelector/constants';
 import { COLOR_SELECTOR_STRINGS } from '@/features/phoneDetail/ColorSelector/constants';
 import { SIMILAR_PRODUCTS_STRINGS } from '@/features/phoneDetail/SimilarProducts/constants';
+import { APP_CONFIG } from '@/config/app';
 
 const FIRST_PHONE_URL = /\/phones\/.+/;
 
@@ -18,7 +19,7 @@ test.describe('Phone Detail', () => {
     });
 
     test('displays the base price', async ({ page }) => {
-      const price = page.getByText(`${mockPhoneDetail.basePrice} ${PHONE_DETAIL_STRINGS.currency}`);
+      const price = page.getByText(`${mockPhoneDetail.basePrice} ${APP_CONFIG.currency}`);
       await expect(price).toBeVisible();
     });
 
@@ -47,7 +48,9 @@ test.describe('Phone Detail', () => {
     });
 
     test('clicking a similar product navigates to its detail', async ({ page }) => {
-      const similarProduct = page.getByRole('list', { name: SIMILAR_PRODUCTS_STRINGS.gridAriaLabel })
+      const similarProduct = page.getByRole('list', {
+        name: SIMILAR_PRODUCTS_STRINGS.gridAriaLabel,
+      });
       await similarProduct.getByRole('listitem').first().click();
 
       await expect(page).toHaveURL(FIRST_PHONE_URL);
@@ -57,7 +60,7 @@ test.describe('Phone Detail', () => {
   test.describe('storage selector', () => {
     test('storage options are visible', async ({ page }) => {
       const storageGroup = page.getByRole('group', { name: STORAGE_SELECTOR_STRINGS.ariaLabel });
-      const button = storageGroup.getByRole('button').first()
+      const button = storageGroup.getByRole('button').first();
 
       await expect(button).toBeVisible();
     });
@@ -72,7 +75,7 @@ test.describe('Phone Detail', () => {
     });
 
     test('price updates when storage is selected', async ({ page }) => {
-      const initialPrice = page.getByText(`${mockPhoneDetail.basePrice} ${PHONE_DETAIL_STRINGS.currency}`);
+      const initialPrice = page.getByText(`${mockPhoneDetail.basePrice} ${APP_CONFIG.currency}`);
       await expect(initialPrice).toBeVisible();
 
       const storageGroup = page.getByRole('group', { name: STORAGE_SELECTOR_STRINGS.ariaLabel });
@@ -80,7 +83,7 @@ test.describe('Phone Detail', () => {
 
       await secondOption.click();
 
-      const updatedPrice = page.getByText(`${mockPhoneDetail.basePrice} ${PHONE_DETAIL_STRINGS.currency}`);
+      const updatedPrice = page.getByText(`${mockPhoneDetail.basePrice} ${APP_CONFIG.currency}`);
       expect(updatedPrice).not.toBe(initialPrice);
     });
   });
@@ -117,7 +120,9 @@ test.describe('Phone Detail', () => {
 
   test.describe('add to cart button', () => {
     test('is disabled when no storage and color are selected', async ({ page }) => {
-      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCartDisabled });
+      const addToCartButton = page.getByRole('button', {
+        name: PHONE_DETAIL_STRINGS.addToCartDisabled,
+      });
 
       await expect(addToCartButton).toBeDisabled();
     });
@@ -127,23 +132,26 @@ test.describe('Phone Detail', () => {
       const secondColor = colorGroup.getByRole('button').nth(1);
       await secondColor.click();
 
-      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCartDisabled });
+      const addToCartButton = page.getByRole('button', {
+        name: PHONE_DETAIL_STRINGS.addToCartDisabled,
+      });
 
       await expect(addToCartButton).toBeDisabled();
     });
 
     test('is enabled when both storage and color are selected', async ({ page }) => {
       const storageGroup = page.getByRole('group', { name: STORAGE_SELECTOR_STRINGS.ariaLabel });
-      const stoprageOption = storageGroup.getByRole('button').first()
+      const stoprageOption = storageGroup.getByRole('button').first();
 
       await stoprageOption.click();
-
 
       const colorGroup = page.getByRole('group', { name: COLOR_SELECTOR_STRINGS.ariaLabel });
       const secondColor = colorGroup.getByRole('button').nth(1);
       await secondColor.click();
 
-      const addToCartButton = page.getByRole('button', { name: PHONE_DETAIL_STRINGS.addToCart(mockPhoneDetail.name) });
+      const addToCartButton = page.getByRole('button', {
+        name: PHONE_DETAIL_STRINGS.addToCart(mockPhoneDetail.name),
+      });
 
       await expect(addToCartButton).toBeEnabled();
     });

@@ -4,6 +4,7 @@ import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
 import { SIMILAR_PRODUCTS_STRINGS } from './SimilarProducts/constants';
 import { mockPhoneDetail } from '@/mocks/phoneDetail.mock';
 import { CartProvider } from '@/context/CartContext/CartContext';
+import { APP_CONFIG } from '@/config/app';
 
 const renderWithCart = (ui: React.ReactElement) => render(<CartProvider>{ui}</CartProvider>);
 
@@ -20,9 +21,7 @@ describe('PhoneDetail', () => {
     it('renders the base price initially', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const price = screen.getByText(
-        `${mockPhoneDetail.basePrice} ${PHONE_DETAIL_STRINGS.currency}`
-      );
+      const price = screen.getByText(`${mockPhoneDetail.basePrice} ${APP_CONFIG.currency}`);
 
       expect(price).toBeInTheDocument();
     });
@@ -85,7 +84,7 @@ describe('PhoneDetail', () => {
       fireEvent.click(storageOption);
 
       const price = screen.getByText(
-        `${mockPhoneDetail.storageOptions[0].price} ${PHONE_DETAIL_STRINGS.currency}`
+        `${mockPhoneDetail.storageOptions[0].price} ${APP_CONFIG.currency}`
       );
 
       expect(price).toBeInTheDocument();

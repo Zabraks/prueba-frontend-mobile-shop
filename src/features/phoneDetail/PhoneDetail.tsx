@@ -13,10 +13,11 @@ import { SimilarProducts } from '@/features/phoneDetail/SimilarProducts/SimilarP
 import { StorageSelector } from '@/features/phoneDetail/StorageSelector/StorageSelector';
 import { ColorSelector } from '@/features/phoneDetail/ColorSelector/ColorSelector';
 import { Button } from '@/ui/Button/Button';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
 import styles from './PhoneDetail.module.scss';
 import { PHONE_DETAIL_STRINGS } from './constants';
 import { useCartContext } from '@/context/CartContext/CartContext';
+import { APP_CONFIG } from '@/config/app';
 
 interface PhoneDetailProps {
   data: PhoneDetailType;
@@ -90,7 +91,7 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
             <div className={styles.info}>
               <h1 className={styles.name}>{data.name}</h1>
               <span className={styles.price}>
-                {currentOption.price} {PHONE_DETAIL_STRINGS.currency}
+                {currentOption.price} {APP_CONFIG.currency}
               </span>
             </div>
             <div className={styles.selectors}>

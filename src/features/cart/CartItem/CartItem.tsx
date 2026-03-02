@@ -3,6 +3,7 @@ import type { CartItem as CartItemType } from '@/domain/cart/cart.types';
 import { Button } from '@/ui/Button/Button';
 import { CART_ITEM_STRINGS } from './constants';
 import styles from './CartItem.module.scss';
+import { APP_CONFIG } from '@/config/app';
 
 interface CartItemProps {
   item: CartItemType;
@@ -26,7 +27,7 @@ export const CartItem = ({ item, onRemove }: CartItemProps) => {
             </p>
           </div>
           <p>
-            {price} {CART_ITEM_STRINGS.currency}
+            {price} {APP_CONFIG.currency}
           </p>
         </div>
         <Button

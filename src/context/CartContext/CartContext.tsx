@@ -1,5 +1,6 @@
 'use client';
 
+import { APP_CONFIG } from '@/config/app';
 import { createContext, useContext, useReducer, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { CartItem } from '@/domain/cart/cart.types';
@@ -59,22 +60,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('cart');
+      const stored = localStorage.getItem(APP_CONFIG.cartStorageKey);
       if (stored) {
         const parsed: unknown = JSON.parse(stored);
         if (isCartItemArray(parsed)) {
           dispatch({ type: 'HYDRATE', payload: parsed });
         } else {
-          localStorage.removeItem('cart');
+          localStorage.removeItem(APP_CONFIG.cartStorageKey);
         }
       }
     } catch {
-      localStorage.removeItem('cart');
+      localStorage.removeItem(APP_CONFIG.cartStorageKey);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.items));
+    localStorage.setItem(APP_CONFIG.cartStorageKey, JSON.stringify(state.items));
   }, [state.items]);
 
   const addItem = (item: CartItem) => dispatch({ type: 'ADD_ITEM', payload: item });

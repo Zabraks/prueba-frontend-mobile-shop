@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navbar } from './Navbar';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
 import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
 import { CartProvider } from '@/context/CartContext/CartContext';
 import { mockCart } from '@/mocks/cart.mock';

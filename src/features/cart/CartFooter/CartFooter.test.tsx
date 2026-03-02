@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { CartFooter } from '@/features/cart/CartFooter/CartFooter';
 import { CART_FOOTER_STRINGS } from '@/features/cart/CartFooter/constants';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
+import { APP_CONFIG } from '@/config/app';
 
 describe('CartFooter', () => {
   const mockOnPay = vi.fn();
@@ -26,7 +27,7 @@ describe('CartFooter', () => {
 
       render(<CartFooter totalPrice={totalValue} hasItems={true} onPay={mockOnPay} />);
 
-      const totalPrice = screen.getByText(`${totalValue} ${CART_FOOTER_STRINGS.currency}`);
+      const totalPrice = screen.getByText(`${totalValue} ${APP_CONFIG.currency}`);
       const payButton = screen.getByRole('button', { name: CART_FOOTER_STRINGS.pay });
 
       expect(totalPrice).toBeInTheDocument();

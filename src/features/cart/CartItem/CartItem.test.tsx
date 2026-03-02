@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { CartItem } from '@/features/cart/CartItem/CartItem';
 import { CART_ITEM_STRINGS } from '@/features/cart/CartItem/constants';
 import { mockCart } from '@/mocks/cart.mock';
+import { APP_CONFIG } from '@/config/app';
 
 describe('CartItem', () => {
   const mockOnRemove = vi.fn();
@@ -32,7 +33,7 @@ describe('CartItem', () => {
     it('renders the price', () => {
       render(<CartItem item={itemMocked} onRemove={mockOnRemove} />);
 
-      const price = screen.getByText(`${itemMocked.price} ${CART_ITEM_STRINGS.currency}`);
+      const price = screen.getByText(`${itemMocked.price} ${APP_CONFIG.currency}`);
 
       expect(price).toBeInTheDocument();
     });

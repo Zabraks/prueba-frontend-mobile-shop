@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { PhoneListItem } from '@/domain/phone/phone.types';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
 import { PHONE_CARD_STRINGS } from './constants';
 import styles from './PhoneItem.module.scss';
 import { Card } from '@/ui/Card/Card';
+import { APP_CONFIG } from '@/config/app';
 
 interface PhoneItemProps {
   phone: PhoneListItem;
@@ -33,7 +34,7 @@ export const PhoneItem = ({ phone, priority }: PhoneItemProps) => {
             <span className={styles.name}>{name}</span>
           </div>
           <span className={styles.price}>
-            {basePrice} {PHONE_CARD_STRINGS.currency}
+            {basePrice} {APP_CONFIG.currency}
           </span>
         </div>
       </Card>
