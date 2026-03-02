@@ -3,7 +3,7 @@ import { test, expect } from './fixtures';
 import { SEARCH_BAR_STRINGS } from '@/features/phoneList/SearchBar/constants';
 import { API_CONFIG } from '@/config/api';
 import { mockPhoneList } from '@/mocks/phonelist.mock';
-import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
+import { getFilteredPhoneList } from './fixtures/helpers';
 
 test.describe('SearchBar', () => {
   test.beforeEach(async ({ page }) => {
@@ -92,13 +92,13 @@ test.describe('Search with URL params', () => {
     });
 
     test('shows filtered results when loading with search param', async ({ page }) => {
+      const expectedCount = getFilteredPhoneList('samsung').length;
+
       await page.goto(`${ROUTES.phones}?search=samsung`);
 
       const items = page.getByRole('listitem');
-      await expect(items.first()).toBeVisible();
-
-      const count = await items.count();
-      await expect(page.getByText(SEARCH_BAR_STRINGS.results(count))).toBeVisible();
+      await expect(items).toHaveCount(expectedCount);
+      await expect(page.getByText(SEARCH_BAR_STRINGS.results(expectedCount))).toBeVisible();
     });
 
     test('shows all phones when loading without search param', async ({ page }) => {

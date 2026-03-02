@@ -10,6 +10,7 @@ import { Grid } from '@/ui/Grid/Grid';
 import type { PhoneListItem } from '@/domain/phone/phone.types';
 import { PhoneItem } from '@/features/phoneList/PhoneItem/PhoneItem';
 import { PHONE_LIST_STRINGS } from './constants';
+import { API_CONFIG } from '@/config/api';
 
 interface PhoneListProps {
   initialPhones: PhoneListItem[];
@@ -32,11 +33,12 @@ export const PhoneList = ({ initialPhones }: PhoneListProps) => {
     }
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [debouncedSearch, pathname, router, searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch]);
 
   const { data: phones = initialPhones, isError } = usePhoneList(
-    initialPhones,
-    debouncedSearch ? { search: debouncedSearch } : {}
+    debouncedSearch ? undefined : initialPhones,
+    debouncedSearch ? { search: debouncedSearch } : { limit: API_CONFIG.defaultLimit }
   );
 
   if (isError) {

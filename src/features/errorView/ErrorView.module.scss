@@ -1,0 +1,53 @@
+@use '@/styles/mixins' as m;
+
+.wrapper {
+  @include m.container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--navbar-height));
+  gap: var(--space-lg);
+  width: 300px;
+  @include m.tablet {
+    width: 100%;
+  }
+  @include m.desktop {
+    width: 100%;
+    gap: var(--space-2xl);
+  }
+}
+
+.message {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+
+  a,
+  button {
+    width: 260px;
+  }
+  button {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  @include m.tablet {
+    flex-direction: row;
+    width: auto;
+  }
+  @include m.desktop {
+    flex-direction: row;
+    width: auto;
+  }
+}

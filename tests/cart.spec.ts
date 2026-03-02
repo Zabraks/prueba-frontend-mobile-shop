@@ -52,7 +52,6 @@ test.describe('Cart', () => {
       const firstPhone = page.getByRole('listitem').first();
 
       await firstPhone.click();
-
       await page.waitForURL(/\/phones\/.+/);
 
       const storageOption = page.getByRole('group', { name: STORAGE_SELECTOR_STRINGS.ariaLabel });

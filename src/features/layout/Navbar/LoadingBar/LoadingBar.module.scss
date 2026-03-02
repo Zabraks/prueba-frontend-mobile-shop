@@ -4,11 +4,17 @@
   left: 0;
   height: 1px;
   width: 0;
+  opacity: 0;
   background-color: var(--color-text-primary);
-  transition: none;
 
   &[data-loading='true'] {
-    animation: progress var(--animation-duration) ease-out forwards;
+    animation: progress 600ms ease-out forwards;
+  }
+
+  &[data-loading='false'] {
+    animation: none; // resetea la animación cuando termina
+    width: 0;
+    opacity: 0;
   }
 }
 

@@ -5,8 +5,11 @@ import { Navbar } from '@/features/layout/Navbar/Navbar';
 import '@/styles/globals.scss';
 
 export const metadata: Metadata = {
-  title: 'Mobile Shop',
-  description: 'Mobile shop built with Next.js',
+  title: {
+    default: 'MBST',
+    template: '%s | MBST',
+  },
+  description: 'Mobile shop',
 };
 
 export default function RootLayout({

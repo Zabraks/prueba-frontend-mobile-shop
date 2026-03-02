@@ -38,8 +38,6 @@ const eslintConfig = defineConfig([
     rules: {
       // Prettier
       "prettier/prettier": "error",
-      // Console
-      "no-console": "error",
       // React
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
