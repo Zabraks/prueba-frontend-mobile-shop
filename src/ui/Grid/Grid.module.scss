@@ -1,11 +1,10 @@
-@use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
-
-$border: t.$border-width solid t.$color-border;
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
+  padding-left: var(--border-width);
+  padding-top: var(--border-width);
 
   @include m.tablet {
     grid-template-columns: repeat(2, 1fr);
@@ -14,28 +13,23 @@ $border: t.$border-width solid t.$color-border;
   @include m.desktop {
     grid-template-columns: repeat(5, 1fr);
   }
+
+  &[data-variant='extended'] {
+    @include m.tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include m.desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 }
 
 .item {
   display: flex;
   flex-direction: column;
-  background-color: t.$color-background;
-  border: $border;
-  margin-left: -(t.$border-width);
-  margin-top: -(t.$border-width);
-}
-
-.grid {
-  padding-left: t.$border-width;
-  padding-top: t.$border-width;
-}
-
-.grid[data-variant='extended'] {
-  @include m.tablet {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include m.desktop {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  background-color: var(--color-background);
+  border: var(--border-width) solid var(--color-border);
+  margin-left: calc(-1 * var(--border-width));
+  margin-top: calc(-1 * var(--border-width));
 }

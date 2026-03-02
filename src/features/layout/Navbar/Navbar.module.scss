@@ -1,12 +1,11 @@
-@use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
 
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background-color: t.$color-background;
-  height: t.$navbar-height;
+  z-index: var(--z-index-up);
+  background-color: var(--color-background);
+  height: var(--navbar-height);
 }
 
 .nav {
@@ -16,7 +15,7 @@
 }
 
 .logo {
-  color: t.$color-text-primary;
-  height: t.$font-size-xl; // o el size token que corresponda
+  color: var(--color-text-primary);
+  height: var(--font-size-xl);
   width: auto;
 }

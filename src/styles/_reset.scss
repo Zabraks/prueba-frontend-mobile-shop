@@ -1,5 +1,3 @@
-@use '@/styles/_tokens' as t;
-
 *,
 *::before,
 *::after {
@@ -15,11 +13,11 @@ html {
 }
 
 body {
-  font-family: t.$font-family;
-  font-size: t.$font-size-md;
-  line-height: t.$line-height-normal;
-  background-color: t.$color-background;
-  color: t.$color-text-primary;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -65,5 +63,5 @@ button {
   cursor: pointer;
   border: none;
   background: none;
-  font-family: t.$font-family;
+  font-family: var(--font-family);
 }

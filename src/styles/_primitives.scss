@@ -4,6 +4,7 @@ $primitive-white: #ffffff;
 $primitive-gray-100: #f3f2f2;
 $primitive-gray-300: #cccccc;
 $primitive-gray-500: #aaaaaa;
+$primitive-red: #cc0000;
 
 // Typography
 $primitive-font-sans: Helvetica, Arial, sans-serif;
@@ -13,7 +14,23 @@ $primitive-size-md: 15px;
 $primitive-size-lg: 20px;
 $primitive-size-xl: 24px;
 
+//Font Weights
+$primitive-weight-light: 300;
+$primitive-weight-regular: 400;
+$primitive-weight-medium: 500;
+$primitive-weight-bold: 700;
+
+//Line Heights
+$primitive-line-tight: 1.2;
+$primitive-line-normal: 1.5;
+
+//Letter Spacing
+$primitive-tracking-none: 0px;
+$primitive-tracking-sm: 0.5px;
+$primitive-tracking-wide: 8%;
+
 // Spacing
+$primitive-space-0: 2px;
 $primitive-space-1: 4px;
 $primitive-space-2: 8px;
 $primitive-space-4: 16px;
@@ -24,8 +41,21 @@ $primitive-space-20: 80px;
 $primitive-space-25: 100px;
 $primitive-space-50: 200px;
 
+// Border Widths
+$primitive-border-thin: 0.5px;
+$primitive-border-regular: 1px;
+$primitive-border-strong: 2px;
+
 // Radius
 $primitive-radius-none: 0px;
+
+// Transitions
+$primitive-duration-fast: 0.15s;
+$primitive-duration-normal: 0.2s;
+$primitive-duration-slow: 500ms;
+
+// Z-index
+$primitive-z-up: 100;
 
 // Layout
 $primitive-max-width: 1200px;

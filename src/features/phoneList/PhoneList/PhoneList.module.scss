@@ -1,7 +1,6 @@
 @use '@/styles/mixins' as m;
-@use '@/styles/tokens' as t;
 
 .wrapper {
   @include m.container;
-  margin-bottom: t.$space-2xl;
+  margin-bottom: var(--space-2xl);
 }

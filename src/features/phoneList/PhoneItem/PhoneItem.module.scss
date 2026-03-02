@@ -1,12 +1,11 @@
-@use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
 
 .phoneCard {
   display: flex;
   flex-direction: column;
-  background-color: t.$color-background;
+  background-color: var(--color-background);
   cursor: pointer;
-  gap: t.$space-lg;
+  gap: var(--space-lg);
 
   &:hover .image {
     transform: scale(1.03);
@@ -19,7 +18,7 @@
   max-width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background-color: t.$color-background;
+  background-color: var(--color-background);
   flex-shrink: 0;
 
   @include m.tablet {
@@ -28,47 +27,41 @@
 }
 
 .image {
-  object-fit: contain;
-  transition: transform 0.2s ease;
+  @include m.image-contain;
+  transition: transform var(--transition-normal) ease;
 }
 
 .info {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: t.$space-sm t.$space-md;
-  gap: t.$space-sm;
+  padding: var(--space-sm) var(--space-md);
+  gap: var(--space-sm);
   margin-top: auto;
   text-transform: uppercase;
 }
 
 .left {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  @include m.flex-column-gap(var(--space-2xs));
   min-width: 0;
 }
 
 .brand {
-  font-size: t.$font-size-xs;
-  color: t.$color-text-secondary;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  @include m.text-ellipsis;
 }
 
 .name {
-  font-size: t.$font-size-sm;
-  font-weight: t.$font-weight-light;
-  color: t.$color-text-primary;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-primary);
+  @include m.text-ellipsis;
 }
 
 .price {
-  font-size: t.$font-size-sm;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
   white-space: nowrap;
   flex-shrink: 0;
   text-transform: uppercase;

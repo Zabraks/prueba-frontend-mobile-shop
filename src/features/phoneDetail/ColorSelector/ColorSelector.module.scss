@@ -1,37 +1,35 @@
-@use '@/styles/tokens' as t;
-
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: t.$space-sm;
+  gap: var(--space-sm);
 }
 
 .options {
   display: flex;
-  gap: t.$space-md;
+  gap: var(--space-md);
 }
 
 //TODO: refactor
 .option {
   width: 24px;
   height: 24px;
-  border: t.$border-width solid t.$color-border;
+  border: var(--border-width) solid var(--color-border);
   cursor: pointer;
   padding: 0;
-  transition: outline 0.15s ease;
+  transition: outline var(--transition-fast) ease;
   &:hover {
-    outline: 2px solid t.$color-text-primary;
-    outline-offset: 2px;
+    outline: var(--outline-width) solid var(--color-text-primary);
+    outline-offset: var(--outline-offset);
   }
 }
 
 .selected {
-  outline: 2px solid t.$color-text-primary;
-  outline-offset: 2px;
+  outline: var(--outline-width) solid var(--color-text-primary);
+  outline-offset: var(--outline-offset);
 }
 
 .label {
-  font-size: t.$font-size-sm;
-  font-weight: t.$font-weight-light;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-primary);
 }

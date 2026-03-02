@@ -1,4 +1,82 @@
-@use '@/styles/primitives';
-@use '@/styles/tokens';
+@use '@/styles/primitives' as p;
 @use '@/styles/reset';
-@use '@/styles/mixins';
+
+// CSS Custom Properties (Design Tokens)
+:root {
+  // Colors
+  --color-background: #{p.$primitive-white};
+  --color-surface: #{p.$primitive-gray-100};
+  --color-border: #{p.$primitive-black};
+  --color-danger: #{p.$primitive-red};
+
+  --color-text-primary: #{p.$primitive-black};
+  --color-text-secondary: #{p.$primitive-gray-500};
+  --color-text-disabled: #{p.$primitive-gray-300};
+  --color-text-inverse: #{p.$primitive-white};
+
+  --color-action-bg: #{p.$primitive-black};
+  --color-action-text: #{p.$primitive-white};
+  --color-action-disabled: #{p.$primitive-gray-100};
+
+  --color-selected-border: #{p.$primitive-black};
+  --color-unselected-border: #{p.$primitive-gray-300};
+
+  // Typography
+  --font-family: #{p.$primitive-font-sans};
+  --font-size-xs: #{p.$primitive-size-xs};
+  --font-size-sm: #{p.$primitive-size-sm};
+  --font-size-md: #{p.$primitive-size-md};
+  --font-size-lg: #{p.$primitive-size-lg};
+  --font-size-xl: #{p.$primitive-size-xl};
+
+  --font-weight-light: #{p.$primitive-weight-light};
+  --font-weight-regular: #{p.$primitive-weight-regular};
+  --font-weight-medium: #{p.$primitive-weight-medium};
+  --font-weight-bold: #{p.$primitive-weight-bold};
+
+  --line-height-tight: #{p.$primitive-line-tight};
+  --line-height-normal: #{p.$primitive-line-normal};
+
+  --letter-spacing-none: #{p.$primitive-tracking-none};
+  --letter-spacing-sm: #{p.$primitive-tracking-sm};
+  --letter-spacing-wide: #{p.$primitive-tracking-wide};
+
+  // Spacing
+  --space-2xs: #{p.$primitive-space-0};
+  --space-xs: #{p.$primitive-space-1};
+  --space-sm: #{p.$primitive-space-2};
+  --space-md: #{p.$primitive-space-4};
+  --space-lg: #{p.$primitive-space-6};
+  --space-xl: #{p.$primitive-space-8};
+  --space-2xl: #{p.$primitive-space-10};
+  --space-3xl: #{p.$primitive-space-20};
+  --space-4xl: #{p.$primitive-space-25};
+  --space-5xl: #{p.$primitive-space-50};
+
+  // Borders
+  --border-radius: #{p.$primitive-radius-none};
+  --border-card-width: #{p.$primitive-border-thin};
+  --border-width: #{p.$primitive-border-regular};
+  --border-width-strong: #{p.$primitive-border-strong};
+  --border-color: #{p.$primitive-gray-300};
+  --border-color-selected: #{p.$primitive-black};
+
+  // Layout
+  --max-width: #{p.$primitive-max-width};
+  --navbar-height: #{p.$primitive-navbar-height};
+
+  // Grid
+  --grid-gap: #{p.$primitive-space-2};
+
+  // Transitions
+  --transition-fast: #{p.$primitive-duration-fast};
+  --transition-normal: #{p.$primitive-duration-normal};
+  --animation-duration: #{p.$primitive-duration-slow};
+
+  // Outline
+  --outline-width: #{p.$primitive-border-strong};
+  --outline-offset: #{p.$primitive-space-0};
+
+  // Z-index
+  --z-index-up: #{p.$primitive-z-up};
+}
