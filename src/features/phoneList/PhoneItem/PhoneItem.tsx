@@ -8,9 +8,10 @@ import { Card } from '@/ui/Card/Card';
 
 interface PhoneItemProps {
   phone: PhoneListItem;
+  priority?: boolean;
 }
 
-export const PhoneItem = ({ phone }: PhoneItemProps) => {
+export const PhoneItem = ({ phone, priority }: PhoneItemProps) => {
   const { id, brand, name, basePrice, imageUrl } = phone;
 
   return (
@@ -23,6 +24,7 @@ export const PhoneItem = ({ phone }: PhoneItemProps) => {
             fill
             sizes="(max-width: 767px) 50vw, 20vw"
             className={styles.image}
+            priority={priority}
           />
         </div>
         <div className={styles.info}>

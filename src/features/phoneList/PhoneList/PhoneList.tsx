@@ -1,4 +1,3 @@
-//TODO: aqui estará el searchbar con tanstack query, por eso ponemos useClient
 'use client';
 
 import { useState } from 'react';
@@ -35,7 +34,7 @@ export const PhoneList = ({ initialPhones }: PhoneListProps) => {
         items={phones}
         keyExtractor={(phone, key) => `${phone.id}-${key}`}
         ariaLabel={PHONE_LIST_STRINGS.gridAriaLabel}
-        renderItem={(phone) => <PhoneItem phone={phone} />}
+        renderItem={(phone, key) => <PhoneItem phone={phone} priority={key === 0} />}
       />
     </div>
   );

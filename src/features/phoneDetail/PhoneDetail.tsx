@@ -113,14 +113,13 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
               fullWidth
               disabled={!canAddToCart}
               onClick={handleAddToCart}
-              // TODO: meter en strings
               aria-label={
                 canAddToCart
                   ? PHONE_DETAIL_STRINGS.addToCart(data.name)
                   : PHONE_DETAIL_STRINGS.addToCartDisabled
               }
             >
-              {PHONE_DETAIL_STRINGS.addToCart}
+              {PHONE_DETAIL_STRINGS.addToCartButton}
             </Button>
           </div>
         </div>

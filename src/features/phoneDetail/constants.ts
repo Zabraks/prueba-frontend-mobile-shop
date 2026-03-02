@@ -6,6 +6,7 @@ export const PHONE_DETAIL_STRINGS = {
   currency: 'EUR',
   storageLabel: 'STORAGE ¿HOW MUCH SPACE DO YOU NEED?',
   colorLabel: 'COLOR. PICK YOUR FAVOURITE.',
+  addToCartButton: 'AÑADIR',
   addToCart: (itemName: string) => `Add ${itemName} to cart`,
   addToCartDisabled: 'Select storage and color to add to cart',
   specsTitle: 'SPECIFICATIONS',

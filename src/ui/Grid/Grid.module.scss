@@ -1,34 +1,39 @@
 @use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
 
+$border: t.$border-width solid t.$color-border;
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: t.$border-width;
-  background-color: t.$color-border;
-  border: t.$border-width solid t.$color-border;
+  grid-template-columns: 1fr;
 
   @include m.tablet {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include m.mobile {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  &[data-variant='extended'] {
-    grid-template-columns: repeat(6, 1fr);
-
-    @include m.tablet {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @include m.mobile {
-      grid-template-columns: repeat(1, 1fr);
-    }
+  @include m.desktop {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 .item {
   background-color: t.$color-background;
+  border: $border;
+  margin-left: -(t.$border-width);
+  margin-top: -(t.$border-width);
+}
+
+.grid {
+  padding-left: t.$border-width;
+  padding-top: t.$border-width;
+}
+
+.grid[data-variant='extended'] {
+  @include m.tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include m.desktop {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }

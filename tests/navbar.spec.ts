@@ -26,7 +26,6 @@ test.describe('Navbar', () => {
     await expect(page).toHaveURL('/phones');
   });
 
-  //TODO: adaptar cuando hagamos el carrito
   test('the cart counter displays 0 initially', async ({ page }) => {
     const cart = page.getByRole('link', { name: NAVBAR_STRINGS.cartAriaLabel(0) });
 
