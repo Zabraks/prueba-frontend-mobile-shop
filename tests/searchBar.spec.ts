@@ -1,13 +1,14 @@
-import { test, expect } from '@playwright/test';
+import { ROUTES } from '@/config/routes';
+import { test, expect } from './fixtures';
 import { SEARCH_BAR_STRINGS } from '@/features/phoneList/SearchBar/constants';
 
 test.describe('SearchBar', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/phones');
+    await page.goto(ROUTES.phones);
   });
 
   test('displays 20 results initially', async ({ page }) => {
-    const results = page.getByText(SEARCH_BAR_STRINGS.results(20))
+    const results = page.getByText(SEARCH_BAR_STRINGS.results(20));
 
     await expect(results).toBeVisible();
   });
@@ -23,7 +24,7 @@ test.describe('SearchBar', () => {
     const searchBox = page.getByRole('searchbox');
     await searchBox.fill('xyznotexist123');
 
-    const results = page.getByText(SEARCH_BAR_STRINGS.results(0)); 
+    const results = page.getByText(SEARCH_BAR_STRINGS.results(0));
     await expect(results).toBeVisible();
   });
 
@@ -36,7 +37,7 @@ test.describe('SearchBar', () => {
 
     await expect(searchBox).toHaveValue('');
 
-    const results = page.getByText(SEARCH_BAR_STRINGS.results(20))
+    const results = page.getByText(SEARCH_BAR_STRINGS.results(20));
     await expect(results).toBeVisible();
   });
 

@@ -5,12 +5,13 @@ import { STORAGE_SELECTOR_STRINGS } from '@/features/phoneDetail/StorageSelector
 import { COLOR_SELECTOR_STRINGS } from '@/features/phoneDetail/ColorSelector/constants';
 import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
 import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
+import { ROUTES } from '@/config/routes';
 
 test.describe('Cart', () => {
   test.describe('empty cart', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto('/cart');
+      await page.goto(ROUTES.cart);
     });
 
     test('displays CART (0) when empty', async ({ page }) => {
@@ -40,13 +41,13 @@ test.describe('Cart', () => {
 
       await continueShoppingButton.click();
 
-      await expect(page).toHaveURL('/phones');
+      await expect(page).toHaveURL(ROUTES.phones);
     });
   });
 
   test.describe('cart with items', () => {
     test.beforeEach(async ({ page }) => {
-      await page.goto('/phones');
+      await page.goto(ROUTES.phones);
 
       const firstPhone = page.getByRole('listitem').first();
 

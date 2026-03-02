@@ -1,16 +1,17 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 import { mockPhoneDetail } from '@/mocks/phoneDetail.mock';
 import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
 import { STORAGE_SELECTOR_STRINGS } from '@/features/phoneDetail/StorageSelector/constants';
 import { COLOR_SELECTOR_STRINGS } from '@/features/phoneDetail/ColorSelector/constants';
 import { SIMILAR_PRODUCTS_STRINGS } from '@/features/phoneDetail/SimilarProducts/constants';
 import { APP_CONFIG } from '@/config/app';
+import { ROUTES } from '@/config/routes';
 
 const FIRST_PHONE_URL = /\/phones\/.+/;
 
 test.describe('Phone Detail', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`/phones/${mockPhoneDetail.id}`);
+    await page.goto(ROUTES.phoneDetail(mockPhoneDetail.id));
   });
 
   test.describe('rendering', () => {
@@ -44,7 +45,7 @@ test.describe('Phone Detail', () => {
       const backLink = page.getByRole('link', { name: PHONE_DETAIL_STRINGS.back });
 
       await backLink.click();
-      await expect(page).toHaveURL('/phones');
+      await expect(page).toHaveURL(ROUTES.phones);
     });
 
     test('clicking a similar product navigates to its detail', async ({ page }) => {
