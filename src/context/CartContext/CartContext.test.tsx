@@ -60,22 +60,6 @@ describe('CartContext', () => {
     });
   });
 
-  describe('isInCart', () => {
-    it('returns false when item is not in cart', () => {
-      const { result } = renderHook(() => useCartContext(), { wrapper });
-
-      expect(result.current.isInCart(mockCart[0].id)).toBe(false);
-    });
-
-    it('returns true when item is in cart', () => {
-      const { result } = renderHook(() => useCartContext(), { wrapper });
-
-      act(() => result.current.addItem(mockCart[0]));
-
-      expect(result.current.isInCart(mockCart[0].id)).toBe(true);
-    });
-  });
-
   describe('localStorage persistence', () => {
     it('persists cart to localStorage when items change', () => {
       const { result } = renderHook(() => useCartContext(), { wrapper });

@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { test as base, expect } from '@playwright/test';
 import { mockPhoneList } from '@/mocks/phonelist.mock';
 import { mockPhoneDetail } from '@/mocks/phoneDetail.mock';
 import { getFilteredPhoneList } from './helpers';
@@ -14,7 +14,6 @@ export const test = base.extend({
       if (pathname === '/products' || pathname.endsWith('/products')) {
         const search = url.searchParams.get('search');
         const responseData = search ? getFilteredPhoneList(search) : mockPhoneList;
-
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
@@ -40,4 +39,4 @@ export const test = base.extend({
   },
 });
 
-export { expect } from '@playwright/test';
+export { expect };

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { ErrorView } from '@/features/errorView/ErrorView';
+import { ErrorView } from '@/features//layout/errorView/ErrorView';
 
 interface ErrorProps {
   error: Error & { digest?: string };

@@ -5,7 +5,7 @@ import { STORAGE_SELECTOR_STRINGS } from '@/features/phoneDetail/StorageSelector
 import { COLOR_SELECTOR_STRINGS } from '@/features/phoneDetail/ColorSelector/constants';
 import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
 import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
-import { test, expect } from './fixtures';
+import { test, expect } from '../fixtures';
 import { ROUTES } from '@/config/routes';
 
 test.describe('Cart', () => {
@@ -50,9 +50,14 @@ test.describe('Cart', () => {
       await page.goto(ROUTES.phones);
 
       const firstPhone = page.getByRole('listitem').first();
+      await expect(firstPhone).toBeVisible();
 
-      await firstPhone.click();
-      await page.waitForURL(/\/phones\/.+/);
+      const firstPhoneLink = firstPhone.locator('a').first();
+
+      await Promise.all([
+        page.waitForURL(/\/phones\/.+/),
+        firstPhoneLink.click(),
+      ]);
 
       const storageOption = page.getByRole('group', { name: STORAGE_SELECTOR_STRINGS.ariaLabel });
       const colorOption = page.getByRole('group', { name: COLOR_SELECTOR_STRINGS.ariaLabel });

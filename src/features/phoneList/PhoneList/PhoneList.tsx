@@ -9,14 +9,16 @@ import { SearchBar } from '../SearchBar/SearchBar';
 import { Grid } from '@/ui/Grid/Grid';
 import type { PhoneListItem } from '@/domain/phone/phone.types';
 import { PhoneItem } from '@/features/phoneList/PhoneItem/PhoneItem';
+import { ErrorView } from '@/features/layout/errorView/ErrorView';
 import { PHONE_LIST_STRINGS } from './constants';
 import { API_CONFIG } from '@/config/api';
 
 interface PhoneListProps {
   initialPhones: PhoneListItem[];
+  initialSearch?: string;
 }
 
-export const PhoneList = ({ initialPhones }: PhoneListProps) => {
+export const PhoneList = ({ initialPhones, initialSearch = '' }: PhoneListProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -36,13 +38,21 @@ export const PhoneList = ({ initialPhones }: PhoneListProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch]);
 
-  const { data: phones = initialPhones, isError } = usePhoneList(
-    debouncedSearch ? undefined : initialPhones,
+  const canUseInitialData = debouncedSearch === initialSearch;
+
+  const {
+    data: phones = initialPhones,
+    isError,
+    refetch,
+  } = usePhoneList(
+    canUseInitialData ? initialPhones : undefined,
     debouncedSearch ? { search: debouncedSearch } : { limit: API_CONFIG.defaultLimit }
   );
 
   if (isError) {
-    return <p>{PHONE_LIST_STRINGS.errorMessage}</p>;
+    return (
+      <ErrorView section="phones" actions={[{ action: 'tryAgain', onClick: () => refetch() }]} />
+    );
   }
 
   return (
@@ -53,7 +63,7 @@ export const PhoneList = ({ initialPhones }: PhoneListProps) => {
         items={phones}
         keyExtractor={(phone, key) => `${phone.id}-${key}`}
         ariaLabel={PHONE_LIST_STRINGS.gridAriaLabel}
-        renderItem={(phone, key) => <PhoneItem phone={phone} priority={key === 0} />}
+        renderItem={(phone, key) => <PhoneItem phone={phone} priority={key < 4} />}
       />
     </div>
   );

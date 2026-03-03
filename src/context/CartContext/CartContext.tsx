@@ -1,7 +1,7 @@
 'use client';
 
 import { APP_CONFIG } from '@/config/app';
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import type { CartItem } from '@/domain/cart/cart.types';
 
@@ -20,7 +20,6 @@ interface CartContextValue {
   removeItem: (phoneId: string) => void;
   totalItems: number;
   totalPrice: number;
-  isInCart: (phoneId: string) => boolean;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -56,6 +55,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 };
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const isHydrated = useRef(false);
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
 
   useEffect(() => {
@@ -72,9 +72,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     } catch {
       localStorage.removeItem(APP_CONFIG.cartStorageKey);
     }
+    isHydrated.current = true;
   }, []);
 
   useEffect(() => {
+    if (!isHydrated.current) return;
     localStorage.setItem(APP_CONFIG.cartStorageKey, JSON.stringify(state.items));
   }, [state.items]);
 
@@ -86,8 +88,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const totalPrice = Number(state.items.reduce((acc, item) => acc + item.price, 0).toFixed(2));
 
-  const isInCart = (phoneId: string) => state.items.some((item) => item.id === phoneId);
-
   return (
     <CartContext.Provider
       value={{
@@ -96,7 +96,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeItem,
         totalItems,
         totalPrice,
-        isInCart,
       }}
     >
       {children}

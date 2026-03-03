@@ -1,10 +1,8 @@
 @use '@/styles/mixins' as m;
 
 .footer {
-  display: flex;
-  justify-content: space-between;
+  @include m.flex-between;
   flex-wrap: wrap;
-  align-items: center;
   padding: var(--space-lg) 0;
   margin-top: var(--space-xl);
   gap: var(--space-md);

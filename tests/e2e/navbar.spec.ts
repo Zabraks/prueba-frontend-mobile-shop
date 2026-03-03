@@ -1,5 +1,5 @@
 import { ROUTES } from '@/config/routes';
-import { test, expect } from './fixtures';
+import { test, expect } from '../fixtures';
 import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
 
 test.describe('Navbar', () => {
@@ -15,15 +15,19 @@ test.describe('Navbar', () => {
 
   test('the cart icon navigates to /cart', async ({ page }) => {
     const cart = page.getByRole('link', { name: NAVBAR_STRINGS.cartAriaLabel(0) })
-    await cart.click();
-
+    await Promise.all([
+      page.waitForURL(ROUTES.cart),
+      cart.click(),
+    ]);
     await expect(page).toHaveURL(ROUTES.cart);
   });
 
   test('the logo navigates to /phones', async ({ page }) => {
     const logo = page.getByRole('link', { name: NAVBAR_STRINGS.logoAriaLabel });
-    await logo.click();
-
+    await Promise.all([
+      page.waitForURL(ROUTES.phones),
+      logo.click(),
+    ]);
     await expect(page).toHaveURL(ROUTES.phones);
   });
 

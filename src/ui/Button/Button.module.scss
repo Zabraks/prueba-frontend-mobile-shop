@@ -2,7 +2,6 @@
   font-family: var(--font-family);
   font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-wide);
-  padding: var(--space-md) var(--space-lg);
   cursor: pointer;
   border: none;
   transition: opacity var(--transition-normal) ease;
@@ -20,7 +19,7 @@
 .primary {
   background-color: var(--color-action-bg);
   color: var(--color-action-text);
-
+  padding: var(--space-md) var(--space-lg);
   &:hover:not(:disabled) {
     opacity: 0.85;
   }
@@ -30,7 +29,7 @@
   background-color: transparent;
   color: var(--color-text-primary);
   border: var(--border-width) solid var(--color-text-primary);
-
+  padding: var(--space-md) var(--space-lg);
   &:hover:not(:disabled) {
     background-color: var(--color-surface);
   }

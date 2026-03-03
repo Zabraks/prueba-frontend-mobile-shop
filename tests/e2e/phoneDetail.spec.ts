@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures';
+import { test, expect } from '../fixtures';
 import { mockPhoneDetail } from '@/mocks/phoneDetail.mock';
 import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
 import { STORAGE_SELECTOR_STRINGS } from '@/features/phoneDetail/StorageSelector/constants';
@@ -16,7 +16,9 @@ test.describe('Phone Detail', () => {
 
   test.describe('rendering', () => {
     test('displays the phone name', async ({ page }) => {
-      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      const phoneName = page.getByRole('heading', { level: 1 });
+
+      await expect(phoneName).toBeVisible();
     });
 
     test('displays the base price', async ({ page }) => {
@@ -44,7 +46,10 @@ test.describe('Phone Detail', () => {
     test('back link navigates to phone list', async ({ page }) => {
       const backLink = page.getByRole('link', { name: PHONE_DETAIL_STRINGS.back });
 
-      await backLink.click();
+      await Promise.all([
+        page.waitForURL(ROUTES.phones),
+        backLink.click(),
+      ]);
       await expect(page).toHaveURL(ROUTES.phones);
     });
 
@@ -52,8 +57,11 @@ test.describe('Phone Detail', () => {
       const similarProduct = page.getByRole('list', {
         name: SIMILAR_PRODUCTS_STRINGS.gridAriaLabel,
       });
-      await similarProduct.getByRole('listitem').first().click();
-
+      const similarFirst = similarProduct.getByRole('listitem').first();
+      await Promise.all([
+        page.waitForURL(FIRST_PHONE_URL),
+        similarFirst.click(),
+      ]);
       await expect(page).toHaveURL(FIRST_PHONE_URL);
     });
   });

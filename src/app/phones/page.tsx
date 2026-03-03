@@ -29,7 +29,7 @@ export default async function PhonesPage({ searchParams }: PhonesPageProps) {
   return (
     <main>
       <Suspense fallback={null}>
-        <PhoneList initialPhones={initialPhones} />
+        <PhoneList initialPhones={initialPhones} initialSearch={search} />
       </Suspense>
     </main>
   );
