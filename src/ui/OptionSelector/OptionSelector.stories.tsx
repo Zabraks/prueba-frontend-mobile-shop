@@ -1,18 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryFn } from '@storybook/nextjs-vite';
 import { useState } from 'react';
 import { OptionSelector, type SelectorOption } from './OptionSelector';
 
-const meta = {
+const meta: Meta<typeof OptionSelector> = {
   title: 'UI/OptionSelector',
   component: OptionSelector,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof OptionSelector>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 const colorOptions: SelectorOption[] = [
   { label: 'Red', value: 'red' },
@@ -20,36 +19,26 @@ const colorOptions: SelectorOption[] = [
   { label: 'Green', value: 'green' },
 ];
 
-export const Colors: Story = {
-  render: (args) => {
-    const [selected, setSelected] = useState<string | null>('red');
-    return (
-      <OptionSelector
-        {...args}
-        selected={selected}
-        onChange={(option) => setSelected(option.value)}
-      />
-    );
-  },
-  args: {
-    options: colorOptions,
-    ariaLabel: 'Select a color',
-  },
+export const Colors: StoryFn = () => {
+  const [selected, setSelected] = useState<string | null>('red');
+  return (
+    <OptionSelector
+      options={colorOptions}
+      ariaLabel="Select a color"
+      selected={selected}
+      onChange={(option) => setSelected(option.value)}
+    />
+  );
 };
 
-export const NoSelection: Story = {
-  render: (args) => {
-    const [selected, setSelected] = useState<string | null>(null);
-    return (
-      <OptionSelector
-        {...args}
-        selected={selected}
-        onChange={(option) => setSelected(option.value)}
-      />
-    );
-  },
-  args: {
-    options: colorOptions,
-    ariaLabel: 'Select an option',
-  },
+export const NoSelection: StoryFn = () => {
+  const [selected, setSelected] = useState<string | null>(null);
+  return (
+    <OptionSelector
+      options={colorOptions}
+      ariaLabel="Select an option"
+      selected={selected}
+      onChange={(option) => setSelected(option.value)}
+    />
+  );
 };
