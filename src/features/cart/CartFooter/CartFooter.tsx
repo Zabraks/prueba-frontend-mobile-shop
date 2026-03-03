@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { Button } from '@/ui/Button/Button';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
 import { CART_FOOTER_STRINGS } from './constants';
 import styles from './CartFooter.module.scss';
+import { APP_CONFIG } from '@/config/app';
 
 interface CartFooterProps {
   totalPrice: number;
@@ -13,19 +14,21 @@ interface CartFooterProps {
 export const CartFooter = ({ totalPrice, hasItems, onPay }: CartFooterProps) => {
   return (
     <footer className={styles.footer}>
-      <Link href={ROUTES.phones} aria-flowto="cart-total">
-        <Button variant="ghost">{CART_FOOTER_STRINGS.continueShopping}</Button>
+      <Link href={ROUTES.phones} className={styles.continueLink}>
+        <Button variant="ghost" className={styles.continueButton}>
+          {CART_FOOTER_STRINGS.continueShopping}
+        </Button>
       </Link>
 
       {hasItems && (
         <>
-          <span className={styles.total} id="total-price" aria-flowto="cart-pay">
+          <span className={styles.total}>
             {CART_FOOTER_STRINGS.total}
             <span>
-              {totalPrice} {CART_FOOTER_STRINGS.currency}
+              {totalPrice} {APP_CONFIG.currency}
             </span>
           </span>
-          <Button variant="primary" onClick={onPay}>
+          <Button variant="primary" className={styles.payButton} onClick={onPay}>
             {CART_FOOTER_STRINGS.pay}
           </Button>
         </>

@@ -1,4 +1,4 @@
-import { PhoneListItem } from '@/domain/phone/phone.types';
+import type { PhoneListItem } from '@/domain/phone/phone.types';
 
 export const mockPhoneList: PhoneListItem[] = [
   {
@@ -8,6 +8,14 @@ export const mockPhoneList: PhoneListItem[] = [
     basePrice: 1329,
     imageUrl:
       'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SMG-S24U-titanium-violet.webp',
+  },
+  {
+    id: 'XMI-RN13P5G',
+    brand: 'Xiaomi',
+    name: 'Redmi Note 13 Pro 5G',
+    basePrice: 399,
+    imageUrl:
+      'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-RN13P5G-midnight-black.webp',
   },
   {
     id: 'SMG-A25',
@@ -38,14 +46,6 @@ export const mockPhoneList: PhoneListItem[] = [
     basePrice: 99,
     imageUrl:
       'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/OPP-A18-azul-brillante.webp',
-  },
-  {
-    id: 'XMI-RN13P5G',
-    brand: 'Xiaomi',
-    name: 'Redmi Note 13 Pro 5G',
-    basePrice: 399,
-    imageUrl:
-      'http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-RN13P5G-midnight-black.webp',
   },
   {
     id: 'XMI-RN13P5G',

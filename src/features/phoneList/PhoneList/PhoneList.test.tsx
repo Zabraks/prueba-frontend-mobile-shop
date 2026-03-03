@@ -4,6 +4,17 @@ import { PHONE_LIST_STRINGS } from '@/features/phoneList/PhoneList/constants';
 import { SEARCH_BAR_STRINGS } from '@/features/phoneList/SearchBar/constants';
 import { mockPhoneList } from '@/mocks/phonelist.mock';
 
+vi.mock('next/navigation', () => ({
+  useSearchParams: vi.fn(() => new URLSearchParams()),
+  useRouter: vi.fn(() => ({ replace: vi.fn() })),
+  usePathname: vi.fn(() => '/phones'),
+}));
+
+import { useRouter, useSearchParams } from 'next/navigation';
+
+const mockUseRouter = vi.mocked(useRouter);
+const mockUseSearchParams = vi.mocked(useSearchParams);
+
 vi.mock('@/hooks/usePhoneList', () => ({
   usePhoneList: vi.fn(),
 }));
@@ -174,6 +185,38 @@ describe('PhoneList', () => {
       const phoneItems = screen.getAllByRole('listitem');
 
       expect(phoneItems).toHaveLength(mockPhoneList.length);
+    });
+
+    it('initializes search input from URL params', () => {
+      mockUseSearchParams.mockReturnValue(new URLSearchParams('search=apple') as never);
+      mockUsePhoneList.mockReturnValue({
+        data: filterPhones('apple'),
+        isError: false,
+      } as never);
+
+      render(<PhoneList initialPhones={mockPhoneList} />);
+
+      expect(screen.getByRole('searchbox')).toHaveValue('apple');
+    });
+
+    it('does not update URL before debounce fires', () => {
+      const mockReplace = vi.fn();
+      mockUseRouter.mockReturnValue({ replace: mockReplace } as never);
+      mockUseSearchParams.mockReturnValue(new URLSearchParams() as never);
+      mockUsePhoneList.mockReturnValue({
+        data: mockPhoneList,
+        isError: false,
+      } as never);
+
+      render(<PhoneList initialPhones={mockPhoneList} />);
+
+      const initialCalls = mockReplace.mock.calls.length;
+
+      fireEvent.change(screen.getByRole('searchbox'), {
+        target: { value: 'sa' },
+      });
+
+      expect(mockReplace).toHaveBeenCalledTimes(initialCalls);
     });
   });
 

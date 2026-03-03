@@ -1,8 +1,14 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { PhoneDetail } from '@/features/phoneDetail/PhoneDetail';
 import { PHONE_DETAIL_STRINGS } from '@/features/phoneDetail/constants';
+import { SIMILAR_PRODUCTS_STRINGS } from './SimilarProducts/constants';
 import { mockPhoneDetail } from '@/mocks/phoneDetail.mock';
 import { CartProvider } from '@/context/CartContext/CartContext';
+import { APP_CONFIG } from '@/config/app';
+
+vi.mock('next/navigation', () => ({
+  useRouter: vi.fn(() => ({ replace: vi.fn() })),
+}));
 
 const renderWithCart = (ui: React.ReactElement) => render(<CartProvider>{ui}</CartProvider>);
 
@@ -11,7 +17,7 @@ describe('PhoneDetail', () => {
     it('renders the phone name', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const name = screen.getByText(mockPhoneDetail.name.toUpperCase());
+      const name = screen.getByText(mockPhoneDetail.name);
 
       expect(name).toBeInTheDocument();
     });
@@ -19,7 +25,7 @@ describe('PhoneDetail', () => {
     it('renders the base price initially', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const price = screen.getByText(`${mockPhoneDetail.basePrice} EUR`);
+      const price = screen.getByText(`${mockPhoneDetail.basePrice} ${APP_CONFIG.currency}`);
 
       expect(price).toBeInTheDocument();
     });
@@ -82,7 +88,7 @@ describe('PhoneDetail', () => {
       fireEvent.click(storageOption);
 
       const price = screen.getByText(
-        `${mockPhoneDetail.storageOptions[0].price} ${PHONE_DETAIL_STRINGS.currency}`
+        `${mockPhoneDetail.storageOptions[0].price} ${APP_CONFIG.currency}`
       );
 
       expect(price).toBeInTheDocument();
@@ -107,7 +113,7 @@ describe('PhoneDetail', () => {
     it('renders specifications section', () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const specsTitle = screen.getByText('SPECIFICATIONS');
+      const specsTitle = screen.getByText(PHONE_DETAIL_STRINGS.specsTitle);
 
       expect(specsTitle).toBeInTheDocument();
     });
@@ -125,21 +131,42 @@ describe('PhoneDetail', () => {
   });
 
   describe('similar products', () => {
-    it('renders similar products section', () => {
+    it('renders similar products section', async () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const similarProductsTitle = screen.getByText('SIMILAR PRODUCTS');
+      const similarProductsTitle = await screen.findByText(SIMILAR_PRODUCTS_STRINGS.title);
 
       expect(similarProductsTitle).toBeInTheDocument();
     });
 
-    it('renders all similar products', () => {
+    it('renders all similar products', async () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
-      mockPhoneDetail.similarProducts.forEach((product) => {
-        const productName = screen.getByText(product.name.toUpperCase());
+
+      for (const product of mockPhoneDetail.similarProducts) {
+        const productName = await screen.findByText(product.name);
 
         expect(productName).toBeInTheDocument();
+      }
+    });
+  });
+
+  describe('add to cart functionality', () => {
+    it('adds item to cart when button is clicked with valid selection', () => {
+      renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
+
+      const storageOption = screen.getByText(mockPhoneDetail.storageOptions[0].capacity);
+      fireEvent.click(storageOption);
+
+      const addToCartButton = screen.getByRole('button', {
+        name: PHONE_DETAIL_STRINGS.addToCart(mockPhoneDetail.name),
       });
+      fireEvent.click(addToCartButton);
+
+      const stored = JSON.parse(localStorage.getItem(APP_CONFIG.cartStorageKey) ?? '[]');
+      expect(stored).toHaveLength(1);
+      expect(stored[0].name).toBe(mockPhoneDetail.name);
+      expect(stored[0].selectedStorage).toBe(mockPhoneDetail.storageOptions[0].capacity);
+      expect(stored[0].selectedColor).toBe(mockPhoneDetail.colorOptions[0].name);
     });
   });
 });

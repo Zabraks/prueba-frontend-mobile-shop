@@ -1,16 +1,20 @@
-@use '@/styles/tokens' as t;
-
 .progressBar {
   position: absolute;
   bottom: -1px;
   left: 0;
   height: 1px;
   width: 0;
-  background-color: t.$color-text-primary;
-  transition: none;
+  opacity: 0;
+  background-color: var(--color-text-primary);
 
   &[data-loading='true'] {
-    animation: progress 500ms ease-out forwards;
+    animation: progress 600ms ease-out forwards;
+  }
+
+  &[data-loading='false'] {
+    animation: none; // resetea la animación cuando termina
+    width: 0;
+    opacity: 0;
   }
 }
 

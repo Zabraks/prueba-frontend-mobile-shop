@@ -1,20 +1,18 @@
-@use '@/styles/tokens' as t;
-
 .input {
   width: 100%;
   border: none;
-  border-bottom: t.$border-width solid t.$color-text-primary;
-  padding: t.$space-sm 0;
-  font-size: t.$font-size-md;
-  font-weight: t.$font-weight-light;
-  font-family: t.$font-family;
+  border-bottom: var(--border-width) solid var(--color-text-primary);
+  padding: var(--space-sm) 0;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-light);
+  font-family: var(--font-family);
   line-height: 100%;
   background: transparent;
   outline: none;
-  color: t.$color-text-primary;
+  color: var(--color-text-primary);
 
   &::placeholder {
-    color: t.$color-text-disabled;
+    color: var(--color-text-disabled);
   }
 
   &::-webkit-search-cancel-button {
@@ -22,8 +20,8 @@
   }
 
   &:disabled {
-    color: t.$color-text-disabled;
-    border-bottom-color: t.$color-text-disabled;
+    color: var(--color-text-disabled);
+    border-bottom-color: var(--color-text-disabled);
     cursor: not-allowed;
   }
 }

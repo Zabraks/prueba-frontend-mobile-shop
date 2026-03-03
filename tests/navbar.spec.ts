@@ -1,9 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { ROUTES } from '@/config/routes';
+import { test, expect } from './fixtures';
 import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
 
 test.describe('Navbar', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/phones');
+    await page.goto(ROUTES.phones);
   });
 
   test('is visible', async ({ page }) => {
@@ -16,17 +17,16 @@ test.describe('Navbar', () => {
     const cart = page.getByRole('link', { name: NAVBAR_STRINGS.cartAriaLabel(0) })
     await cart.click();
 
-    await expect(page).toHaveURL('/cart');
+    await expect(page).toHaveURL(ROUTES.cart);
   });
 
   test('the logo navigates to /phones', async ({ page }) => {
     const logo = page.getByRole('link', { name: NAVBAR_STRINGS.logoAriaLabel });
     await logo.click();
 
-    await expect(page).toHaveURL('/phones');
+    await expect(page).toHaveURL(ROUTES.phones);
   });
 
-  //TODO: adaptar cuando hagamos el carrito
   test('the cart counter displays 0 initially', async ({ page }) => {
     const cart = page.getByRole('link', { name: NAVBAR_STRINGS.cartAriaLabel(0) });
 

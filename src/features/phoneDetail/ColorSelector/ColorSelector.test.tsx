@@ -9,13 +9,7 @@ describe('ColorSelector', () => {
 
   describe('rendering', () => {
     it('renders all color options', () => {
-      render(
-        <ColorSelector
-          colors={mockPhoneDetail.colorOptions}
-          selected={null}
-          onChange={mockOnChange}
-        />
-      );
+      render(<ColorSelector colors={mockPhoneDetail.colorOptions} onChange={mockOnChange} />);
 
       const colorButtons = screen.getAllByRole('button');
 
@@ -23,13 +17,7 @@ describe('ColorSelector', () => {
     });
 
     it('does not show label when no color is selected', () => {
-      render(
-        <ColorSelector
-          colors={mockPhoneDetail.colorOptions}
-          selected={null}
-          onChange={mockOnChange}
-        />
-      );
+      render(<ColorSelector colors={mockPhoneDetail.colorOptions} onChange={mockOnChange} />);
 
       const colorLabels = screen.queryByText(mockPhoneDetail.colorOptions[0].name);
 
@@ -53,13 +41,7 @@ describe('ColorSelector', () => {
 
   describe('interactions', () => {
     it('calls onChange with color name when clicked', () => {
-      render(
-        <ColorSelector
-          colors={mockPhoneDetail.colorOptions}
-          selected={null}
-          onChange={mockOnChange}
-        />
-      );
+      render(<ColorSelector colors={mockPhoneDetail.colorOptions} onChange={mockOnChange} />);
 
       const firstColorOption = screen.getByLabelText(mockPhoneDetail.colorOptions[0].name);
 
@@ -71,13 +53,7 @@ describe('ColorSelector', () => {
 
   describe('accessibility', () => {
     it('each selector has an aria-label with the color name', () => {
-      render(
-        <ColorSelector
-          colors={mockPhoneDetail.colorOptions}
-          selected={null}
-          onChange={mockOnChange}
-        />
-      );
+      render(<ColorSelector colors={mockPhoneDetail.colorOptions} onChange={mockOnChange} />);
 
       mockPhoneDetail.colorOptions.forEach((color) => {
         const colorButton = screen.getByLabelText(color.name);

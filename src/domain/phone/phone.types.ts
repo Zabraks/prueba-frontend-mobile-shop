@@ -1,5 +1,3 @@
-// TODO: Añado solo la parte de dominio por que de momento el api va a usar el mismo
-// luego veré si lo copio para tener las capas diferenciadas o lo mantengo justificando este motivo
 export interface PhoneSpecs {
   screen: string;
   resolution: string;

@@ -1,12 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { phoneService } from '@/services/phone/phoneService';
-import { FetchPhonesListParams } from '@/services/phone/phone.types';
-import { PhoneListItem } from '@/domain/phone/phone.types';
-
-export const phoneKeys = {
-  all: ['phones'] as const,
-  list: (params: FetchPhonesListParams) => ['phones', 'list', params] as const,
-};
+import type { FetchPhonesListParams } from '@/services/phone/phone.api.types';
+import type { PhoneListItem } from '@/domain/phone/phone.types';
+import { API_CONFIG } from '@/config/api';
+import { phoneKeys } from '@/services/phone/phonesKeys';
 
 export const usePhoneList = (initialData?: PhoneListItem[], params: FetchPhonesListParams = {}) => {
   return useQuery({
@@ -14,5 +11,6 @@ export const usePhoneList = (initialData?: PhoneListItem[], params: FetchPhonesL
     queryFn: () => phoneService.getPhoneList(params),
     initialData,
     placeholderData: (previousData) => previousData,
+    staleTime: API_CONFIG.revalidate.phoneList * 1000,
   });
 };

@@ -1,20 +1,20 @@
-@use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
 
 .wrapper {
   @include m.container;
-  padding-top: t.$space-lg;
-  padding-bottom: t.$space-2xl;
-  gap: t.$space-lg;
-  min-height: calc(100vh - t.$navbar-height);
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-2xl);
+  gap: var(--space-lg);
+  min-height: calc(100vh - var(--navbar-height));
   display: flex;
   flex-direction: column;
 }
 
 .title {
-  font-size: t.$font-size-lg;
-  font-weight: t.$font-weight-light;
-  letter-spacing: 0px;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--letter-spacing-none);
+  text-transform: uppercase;
 }
 
 .list {

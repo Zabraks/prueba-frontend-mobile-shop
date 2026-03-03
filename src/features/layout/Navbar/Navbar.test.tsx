@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navbar } from './Navbar';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
 import { NAVBAR_STRINGS } from '@/features/layout/Navbar/constants';
 import { CartProvider } from '@/context/CartContext/CartContext';
 import { mockCart } from '@/mocks/cart.mock';
+import { APP_CONFIG } from '@/config/app';
 
 const createWrapper = () => {
   const queryClient = new QueryClient();
@@ -65,7 +66,7 @@ describe('Navbar', () => {
 
   describe('accessibility', () => {
     it('the cart aria-label reflects the item count', () => {
-      localStorage.setItem('cart', JSON.stringify(mockCart));
+      localStorage.setItem(APP_CONFIG.cartStorageKey, JSON.stringify(mockCart));
       renderWithProviders(<Navbar />);
 
       const cartIcon = screen.getByLabelText(NAVBAR_STRINGS.cartAriaLabel(mockCart.length));

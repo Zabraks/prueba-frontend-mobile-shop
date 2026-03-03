@@ -9,12 +9,27 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./vitest.setup.tsx'],
     exclude: ['tests/**', 'node_modules/**'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/*.d.ts',
+        'src/**/*.module.scss',
+        'src/styles/**',
+        'src/mocks/**',
+        'src/app/**',
+        'src/domain/**',
+        'src/lib/**',
+        'src/services/**',
+      ],
+    },
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@/app': path.resolve(__dirname, './src/app'),
       '@/assets': path.resolve(__dirname, './src/assets'),
+      '@/config': path.resolve(__dirname, './src/config'),
       '@/context': path.resolve(__dirname, './src/context'),
       '@/domain': path.resolve(__dirname, './src/domain'),
       '@/features': path.resolve(__dirname, './src/features'),

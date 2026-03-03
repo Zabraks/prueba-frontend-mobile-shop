@@ -1,80 +1,91 @@
-@use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
 
 .footer {
-  //TODO: REVISAR
-  @include m.flex-column;
+  display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  padding: t.$space-lg 0;
-  margin-top: t.$space-xl;
-  gap: t.$space-md;
-
-  button {
-    width: 50%;
-    font-size: t.$font-size-sm;
-    padding: t.$space-md 0;
-    line-height: t.$space-md;
-  }
-
-  @include m.mobile {
-    flex-wrap: wrap;
-    flex-direction: row;
-
-    .total {
-      order: -1;
-      width: 100%;
-      justify-content: space-between;
-      font-size: t.$font-size-md;
-      color: t.$color-text-primary;
-      font-weight: t.$font-weight-regular;
-    }
-
-    a {
-      order: 0;
-      flex: 1;
-      width: 50%;
-      button {
-        width: 100%;
-      }
-    }
-
-    button[id='cart-pay'] {
-      order: 1;
-      flex: 1;
-    }
-  }
+  padding: var(--space-lg) 0;
+  margin-top: var(--space-xl);
+  gap: var(--space-md);
 
   @include m.tablet {
-    flex-wrap: nowrap;
-    flex-direction: row;
     justify-content: space-between;
-    gap: t.$space-3xl;
-    .total {
-      order: 0;
-      width: 100%;
-      justify-content: flex-end;
-    }
+  }
 
-    a {
-      flex: none;
-    }
-
-    button {
-      font-size: t.$font-size-sm;
-      padding: t.$space-lg t.$space-2xl;
-      line-height: t.$space-md;
-      width: 260px;
-    }
-
-    button[id='cart-pay'] {
-      flex: none;
-    }
+  @include m.desktop {
+    flex-wrap: nowrap;
+    gap: var(--space-3xl);
   }
 }
 
 .total {
   display: flex;
-  align-items: center;
-  gap: t.$space-sm;
+  order: -1;
+  width: 100%;
+  justify-content: space-between;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-regular);
+  text-transform: uppercase;
+  gap: var(--space-sm);
+
+  @include m.desktop {
+    order: 0;
+    justify-content: flex-end;
+    width: 55%;
+  }
+}
+
+.continueLink {
+  order: 0;
+  flex: 1;
+  width: 50%;
+
+  @include m.tablet {
+    flex: none;
+    width: auto;
+  }
+
+  @include m.desktop {
+    flex: none;
+    width: auto;
+  }
+}
+
+.continueButton {
+  width: 100%;
+  font-size: var(--font-size-sm);
+  padding: var(--space-md) 0;
+  line-height: var(--space-md);
+
+  @include m.tablet {
+    width: 260px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  @include m.desktop {
+    width: 260px;
+    padding: var(--space-lg) var(--space-2xl);
+  }
+}
+
+.payButton {
+  order: 1;
+  flex: 1;
+  width: 50%;
+  font-size: var(--font-size-sm);
+  padding: var(--space-md) 0;
+  line-height: var(--space-md);
+
+  @include m.tablet {
+    max-width: 260px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  @include m.desktop {
+    flex: none;
+    width: 260px;
+    padding: var(--space-lg) var(--space-2xl);
+  }
 }

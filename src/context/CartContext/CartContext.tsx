@@ -1,7 +1,9 @@
 'use client';
 
-import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { CartItem } from '@/domain/cart/cart.types';
+import { APP_CONFIG } from '@/config/app';
+import { createContext, useContext, useReducer, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import type { CartItem } from '@/domain/cart/cart.types';
 
 interface CartState {
   items: CartItem[];
@@ -23,6 +25,21 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+const isCartItemArray = (data: unknown): data is CartItem[] => {
+  return (
+    Array.isArray(data) &&
+    data.every(
+      (item) =>
+        typeof item === 'object' &&
+        item !== null &&
+        typeof item.id === 'string' &&
+        typeof item.name === 'string' &&
+        typeof item.price === 'number' &&
+        typeof item.img === 'string'
+    )
+  );
+};
+
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case 'HYDRATE':
@@ -43,17 +60,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('cart');
+      const stored = localStorage.getItem(APP_CONFIG.cartStorageKey);
       if (stored) {
-        dispatch({ type: 'HYDRATE', payload: JSON.parse(stored) });
+        const parsed: unknown = JSON.parse(stored);
+        if (isCartItemArray(parsed)) {
+          dispatch({ type: 'HYDRATE', payload: parsed });
+        } else {
+          localStorage.removeItem(APP_CONFIG.cartStorageKey);
+        }
       }
     } catch {
-      localStorage.removeItem('cart');
+      localStorage.removeItem(APP_CONFIG.cartStorageKey);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.items));
+    localStorage.setItem(APP_CONFIG.cartStorageKey, JSON.stringify(state.items));
   }, [state.items]);
 
   const addItem = (item: CartItem) => dispatch({ type: 'ADD_ITEM', payload: item });
@@ -62,7 +84,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const totalItems = state.items.length;
 
-  const totalPrice = state.items.reduce((acc, item) => acc + item.price, 0);
+  const totalPrice = Number(state.items.reduce((acc, item) => acc + item.price, 0).toFixed(2));
 
   const isInCart = (phoneId: string) => state.items.some((item) => item.id === phoneId);
 

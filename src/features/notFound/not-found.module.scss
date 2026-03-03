@@ -1,0 +1,34 @@
+@use '@/styles/mixins' as m;
+
+.wrapper {
+  @include m.container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  min-height: calc(100vh - var(--navbar-height));
+  text-align: center;
+}
+
+.code {
+  font-size: 80px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
+
+  @include m.tablet {
+    font-size: 120px;
+  }
+}
+
+.message {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  @include m.tablet {
+    font-size: var(--font-size-md);
+  }
+}

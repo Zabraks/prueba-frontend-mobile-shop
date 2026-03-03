@@ -32,6 +32,7 @@ export const SearchBar = ({ value, onChange, resultsCount }: SearchBarProps) => 
         />
         {value && (
           <button
+            type="button"
             className={styles.clear}
             onClick={handleClear}
             aria-label={SEARCH_BAR_STRINGS.clearAriaLabel}

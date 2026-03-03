@@ -1,24 +1,23 @@
-@use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
 
 .wrapper {
   @include m.container;
-  padding-top: t.$space-lg;
-  padding-bottom: t.$space-2xl;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-2xl);
 }
 
 .back {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: t.$space-sm;
-  font-size: t.$font-size-sm;
-  color: t.$color-text-primary;
-  margin-bottom: t.$space-lg;
-  letter-spacing: 0.5px;
-
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-lg);
+  letter-spacing: var(--letter-spacing-sm);
+  text-transform: uppercase;
   & span {
-    font-size: t.$font-size-md;
+    font-size: var(--font-size-md);
   }
 
   &:hover {
@@ -35,7 +34,7 @@
 .mainContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: t.$space-2xl;
+  gap: var(--space-2xl);
   align-items: start;
   width: 100%;
 
@@ -44,65 +43,59 @@
   }
 
   @include m.desktop {
-    width: t.$max-width;
+    width: var(--max-width);
     align-items: center;
   }
 }
 
 .imageWrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  @include m.image-wrapper;
 }
 
 .image {
-  object-fit: contain;
+  @include m.image-contain;
 }
 
 .infoWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: t.$space-lg;
+  @include m.flex-column-gap(var(--space-lg));
   @include m.desktop {
-    padding-left: t.$space-5xl;
+    padding-left: var(--space-5xl);
   }
 }
 
 .info {
-  @include m.flex-column;
-  gap: t.$space-sm;
+  @include m.flex-column-gap(var(--space-sm));
+  text-transform: uppercase;
 }
 
 .name {
-  font-size: t.$font-size-lg;
-  font-weight: t.$font-weight-light;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-primary);
 }
 
 .price {
-  font-size: t.$font-size-md;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
 }
 
-//TODO: refactor
 .selectors {
-  @include m.flex-column;
-  gap: t.$space-xl;
+  @include m.flex-column-gap(var(--space-xl));
 }
 
 .section {
-  @include m.flex-column;
-  gap: t.$space-lg;
+  @include m.flex-column-gap(var(--space-lg));
 }
 
 .sectionLabel {
-  font-size: t.$font-size-sm;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
 }
 
 .specs {
-  @include m.flex-column;
-  gap: t.$space-md;
+  @include m.flex-column-gap(var(--space-md));
+  text-transform: uppercase;
 }
 
 .list {
@@ -113,34 +106,38 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: t.$space-sm 0;
-  border-bottom: t.$border-width solid t.$color-border;
-  gap: t.$space-md;
+  padding: var(--space-sm) 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+  gap: var(--space-md);
 }
 
 .label {
-  font-size: t.$font-size-sm;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: var(--letter-spacing-sm);
   flex-shrink: 0;
 }
 
 .value {
-  font-size: t.$font-size-sm;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
   text-align: right;
 }
 
 .additionalInfo {
-  margin-top: t.$space-2xl;
+  margin-top: var(--space-2xl);
   display: grid;
   grid-template-columns: 1fr;
-  gap: t.$space-2xl;
+  gap: var(--space-2xl);
   align-items: start;
   width: 100%;
 
   @include m.desktop {
-    width: t.$max-width;
+    width: var(--max-width);
   }
+}
+
+.loadingSection {
+  text-transform: uppercase;
 }

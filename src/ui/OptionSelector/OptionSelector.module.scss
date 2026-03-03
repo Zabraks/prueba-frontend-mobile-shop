@@ -1,25 +1,31 @@
-@use '@/styles/tokens' as t;
-
 .wrapper {
   display: flex;
   flex-wrap: wrap;
 }
 
 .option {
-  padding: t.$space-md t.$space-lg;
-  font-family: t.$font-family;
-  font-size: t.$font-size-sm;
-  border: t.$border-width solid t.$border-color;
-  background-color: t.$color-background;
-  color: t.$color-text-primary;
+  position: relative;
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  border: var(--border-width) solid var(--border-color);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: border-color var(--transition-fast) ease;
+  margin-left: calc(-1 * var(--border-width));
+
+  &:first-child {
+    margin-left: 0;
+  }
 
   &:hover {
-    border-color: t.$color-text-primary;
+    z-index: 1;
+    border-color: var(--color-text-primary);
   }
 }
 
 .selected {
-  border-color: t.$color-text-primary;
+  z-index: 2;
+  border-color: var(--color-text-primary);
 }

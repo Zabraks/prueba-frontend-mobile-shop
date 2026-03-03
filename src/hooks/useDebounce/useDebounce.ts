@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
+import { API_CONFIG } from '@/config/api';
 
-export const MIN_SEARCH_LENGTH = 3;
-
-export const useDebounce = (value: string, delay: number = 300): string => {
+export const useDebounce = (value: string, delay: number = API_CONFIG.debounceDelay): string => {
   const [debouncedValue, setDebouncedValue] = useState('');
 
   useEffect(() => {
-    if (value.length < MIN_SEARCH_LENGTH) return;
+    if (value.length < API_CONFIG.minSearchLength) return;
 
     const timer = setTimeout(() => setDebouncedValue(value), delay);
     return () => clearTimeout(timer);
   }, [value, delay]);
 
-  if (value.length < MIN_SEARCH_LENGTH) return '';
+  if (value.length < API_CONFIG.minSearchLength) return '';
 
   return debouncedValue;
 };

@@ -1,24 +1,47 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PhoneDetail as PhoneDetailType } from '@/domain/phone/phone.types';
-import { CartItem } from '@/domain/cart/cart.types';
-import { SimilarProducts } from '@/features/phoneDetail/SimilarProducts/SimilarProducts';
+import type {
+  PhoneDetail as PhoneDetailType,
+  ColorOption,
+  StorageOption,
+} from '@/domain/phone/phone.types';
+import type { CartItem } from '@/domain/cart/cart.types';
 import { StorageSelector } from '@/features/phoneDetail/StorageSelector/StorageSelector';
 import { ColorSelector } from '@/features/phoneDetail/ColorSelector/ColorSelector';
 import { Button } from '@/ui/Button/Button';
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/config/routes';
 import styles from './PhoneDetail.module.scss';
 import { PHONE_DETAIL_STRINGS } from './constants';
 import { useCartContext } from '@/context/CartContext/CartContext';
-
+import { APP_CONFIG } from '@/config/app';
+import { useRouter } from 'next/navigation';
+const SimilarProducts = dynamic(
+  () =>
+    import('@/features/phoneDetail/SimilarProducts/SimilarProducts').then(
+      (mod) => mod.SimilarProducts
+    ),
+  {
+    loading: () => (
+      <div
+        role="status"
+        aria-busy="true"
+        aria-label={PHONE_DETAIL_STRINGS.loadingSimilarProducts}
+        className={styles.loadingSection}
+      />
+    ),
+  }
+);
 interface PhoneDetailProps {
   data: PhoneDetailType;
 }
 
 export const PhoneDetail = ({ data }: PhoneDetailProps) => {
+  const router = useRouter();
+
   const { addItem } = useCartContext();
 
   const [currentOption, setCurrentOption] = useState<Omit<CartItem, 'id'>>({
@@ -28,7 +51,16 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
     selectedColor: data.colorOptions[0].name,
   });
 
-  const handleColorChange = (option) => {
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (document.referrer.includes(window.location.origin)) {
+      router.back();
+    } else {
+      router.push(ROUTES.phones);
+    }
+  };
+
+  const handleColorChange = (option: ColorOption) => {
     setCurrentOption((prev) => ({
       ...prev,
       img: option.imageUrl,
@@ -36,7 +68,7 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
     }));
   };
 
-  const handleStorageChange = (storage) => {
+  const handleStorageChange = (storage: StorageOption) => {
     setCurrentOption((prev) => ({
       ...prev,
       selectedStorage: storage.capacity,
@@ -64,6 +96,7 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
     <div className={styles.wrapper}>
       <Link
         href={ROUTES.phones}
+        onClick={handleBack}
         className={styles.back}
         aria-label={PHONE_DETAIL_STRINGS.backAriaLabel}
       >
@@ -84,10 +117,9 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
           </div>
           <div className={styles.infoWrapper}>
             <div className={styles.info}>
-              {/* //TODO: ojo importante, quitar todos los toUpperCase, revisar si son aplicables para toda la app, hacer un mapper en el api con esa transformación */}
-              <h1 className={styles.name}>{data.name.toUpperCase()}</h1>
+              <h1 className={styles.name}>{data.name}</h1>
               <span className={styles.price}>
-                {currentOption.price} {PHONE_DETAIL_STRINGS.currency}
+                {currentOption.price} {APP_CONFIG.currency}
               </span>
             </div>
             <div className={styles.selectors}>
@@ -113,14 +145,13 @@ export const PhoneDetail = ({ data }: PhoneDetailProps) => {
               fullWidth
               disabled={!canAddToCart}
               onClick={handleAddToCart}
-              // TODO: meter en strings
               aria-label={
                 canAddToCart
                   ? PHONE_DETAIL_STRINGS.addToCart(data.name)
                   : PHONE_DETAIL_STRINGS.addToCartDisabled
               }
             >
-              {PHONE_DETAIL_STRINGS.addToCart}
+              {PHONE_DETAIL_STRINGS.addToCartButton}
             </Button>
           </div>
         </div>

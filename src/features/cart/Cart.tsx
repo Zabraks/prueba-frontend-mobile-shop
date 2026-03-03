@@ -22,8 +22,8 @@ export const Cart = () => {
       <h1 className={styles.title}>{CART_STRINGS.title(totalItems)}</h1>
 
       <ul className={styles.list} aria-label="Cart items">
-        {items.map((item, key) => (
-          <li key={`${key}-${item.name}`}>
+        {items.map((item) => (
+          <li key={item.id}>
             <CartItem item={item} onRemove={() => removeItem(item.id)} />
           </li>
         ))}

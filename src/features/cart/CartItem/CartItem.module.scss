@@ -1,10 +1,9 @@
-@use '@/styles/tokens' as t;
 @use '@/styles/mixins' as m;
 
 .wrapper {
   display: flex;
-  gap: t.$space-md;
-  padding: t.$space-md 0;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
 }
 
 .imageWrapper {
@@ -20,44 +19,30 @@
 }
 
 .image {
-  object-fit: contain;
+  @include m.image-contain;
 }
 
 .data {
-  @include m.flex-column;
-  gap: t.$space-xl;
+  @include m.flex-column-gap(var(--space-xl));
   justify-content: center;
 
   @include m.desktop {
     justify-content: space-between;
-    padding: t.$space-3xl 0;
+    padding: var(--space-3xl) 0;
   }
 }
 
 .info {
-  @include m.flex-column;
-  gap: t.$space-md;
-  font-size: t.$font-size-xs;
-}
-
-.phone {
-  @include m.flex-column;
-  gap: t.$space-xs;
-
+  @include m.flex-column-gap(var(--space-md));
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
 }
 
-.specs {
-  font-size: t.$font-size-xs;
-  color: t.$color-text-secondary;
-}
-
-.price {
-  font-size: t.$font-size-sm;
-  color: t.$color-text-primary;
+.phone {
+  @include m.flex-column-gap(var(--space-xs));
 }
 
 .removeButton {
   align-self: flex-start;
-  font-size: t.$font-size-xs;
+  font-size: var(--font-size-xs);
 }

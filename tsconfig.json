@@ -23,6 +23,7 @@
       "@/*": ["./src/*"],
       "@/app/*": ["./src/app/*"],
       "@/assets/*": ["./src/assets/*"],
+      "@/config/*": ["./src/config/*"],
       "@/context/*": ["./src/context/*"],
       "@/domain/*": ["./src/domain/*"],
       "@/features/*": ["./src/features/*"],

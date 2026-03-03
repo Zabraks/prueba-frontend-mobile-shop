@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: process.env.API_IMAGE_PROTOCOL ?? 'http',
+        protocol: 'http',
         hostname: process.env.API_HOSTNAME ?? '',
       },
     ],

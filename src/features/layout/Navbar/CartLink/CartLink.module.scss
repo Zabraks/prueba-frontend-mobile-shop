@@ -1,18 +1,16 @@
-@use '@/styles/tokens' as t;
-
 .cartLink {
   display: flex;
   align-items: center;
-  gap: t.$space-sm;
+  gap: var(--space-sm);
 }
 
 .cartIcon {
-  color: t.$color-text-primary;
-  height: t.$font-size-md;
+  color: var(--color-text-primary);
+  height: var(--font-size-md);
   width: auto;
 }
 
 .cartCount {
-  font-size: t.$font-size-md;
-  color: t.$color-text-primary;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
 }

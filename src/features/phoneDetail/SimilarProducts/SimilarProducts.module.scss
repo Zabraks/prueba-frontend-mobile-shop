@@ -1,12 +1,11 @@
-@use '@/styles/tokens' as t;
-
 .wrapper {
-  margin-top: t.$space-2xl;
+  margin-top: var(--space-2xl);
 }
 
 .title {
-  font-size: t.$font-size-md;
-  font-weight: t.$font-weight-light;
-  letter-spacing: 0.5px;
-  margin-bottom: t.$space-md;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--letter-spacing-sm);
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
 }

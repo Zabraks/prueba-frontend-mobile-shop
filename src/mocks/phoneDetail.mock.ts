@@ -1,4 +1,4 @@
-import { PhoneDetail } from '@/domain/phone/phone.types';
+import type { PhoneDetail } from '@/domain/phone/phone.types';
 
 export const mockPhoneDetail: PhoneDetail = {
   id: 'SMG-A25',

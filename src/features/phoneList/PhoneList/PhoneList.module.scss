@@ -2,4 +2,5 @@
 
 .wrapper {
   @include m.container;
+  margin-bottom: var(--space-2xl);
 }

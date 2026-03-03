@@ -1,4 +1,4 @@
-import { PhoneListItem } from '@/domain/phone/phone.types';
+import type { PhoneListItem } from '@/domain/phone/phone.types';
 import { Grid } from '@/ui/Grid/Grid';
 import { PhoneItem } from '@/features/phoneList/PhoneItem/PhoneItem';
 import styles from './SimilarProducts.module.scss';
