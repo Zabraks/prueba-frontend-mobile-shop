@@ -131,21 +131,22 @@ describe('PhoneDetail', () => {
   });
 
   describe('similar products', () => {
-    it('renders similar products section', () => {
+    it('renders similar products section', async () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
 
-      const similarProductsTitle = screen.getByText(SIMILAR_PRODUCTS_STRINGS.title);
+      const similarProductsTitle = await screen.findByText(SIMILAR_PRODUCTS_STRINGS.title);
 
       expect(similarProductsTitle).toBeInTheDocument();
     });
 
-    it('renders all similar products', () => {
+    it('renders all similar products', async () => {
       renderWithCart(<PhoneDetail data={mockPhoneDetail} />);
-      mockPhoneDetail.similarProducts.forEach((product) => {
-        const productName = screen.getByText(product.name);
+
+      for (const product of mockPhoneDetail.similarProducts) {
+        const productName = await screen.findByText(product.name);
 
         expect(productName).toBeInTheDocument();
-      });
+      }
     });
   });
 

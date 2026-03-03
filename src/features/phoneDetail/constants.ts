@@ -8,4 +8,5 @@ export const PHONE_DETAIL_STRINGS = {
   addToCart: (itemName: string) => `Add ${itemName} to cart`,
   addToCartDisabled: 'Select storage and color to add to cart',
   specsTitle: 'Specifications',
+  loadingSimilarProducts: 'Loading similar products...',
 } as const;

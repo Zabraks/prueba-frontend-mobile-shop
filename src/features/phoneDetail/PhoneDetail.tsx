@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import type {
@@ -9,7 +10,6 @@ import type {
   StorageOption,
 } from '@/domain/phone/phone.types';
 import type { CartItem } from '@/domain/cart/cart.types';
-import { SimilarProducts } from '@/features/phoneDetail/SimilarProducts/SimilarProducts';
 import { StorageSelector } from '@/features/phoneDetail/StorageSelector/StorageSelector';
 import { ColorSelector } from '@/features/phoneDetail/ColorSelector/ColorSelector';
 import { Button } from '@/ui/Button/Button';
@@ -19,7 +19,21 @@ import { PHONE_DETAIL_STRINGS } from './constants';
 import { useCartContext } from '@/context/CartContext/CartContext';
 import { APP_CONFIG } from '@/config/app';
 import { useRouter } from 'next/navigation';
-
+const SimilarProducts = dynamic(
+  () =>
+    import('@/features/phoneDetail/SimilarProducts/SimilarProducts').then(
+      (mod) => mod.SimilarProducts
+    ),
+  {
+    loading: () => (
+      <div
+        aria-busy="true"
+        styles={styles.loadingSection}
+        aria-label={PHONE_DETAIL_STRINGS.loadingSimilarProducts}
+      />
+    ),
+  }
+);
 interface PhoneDetailProps {
   data: PhoneDetailType;
 }

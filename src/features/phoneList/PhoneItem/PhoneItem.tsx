@@ -6,13 +6,14 @@ import { PHONE_CARD_STRINGS } from './constants';
 import styles from './PhoneItem.module.scss';
 import { Card } from '@/ui/Card/Card';
 import { APP_CONFIG } from '@/config/app';
+import { memo } from 'react';
 
 interface PhoneItemProps {
   phone: PhoneListItem;
   priority?: boolean;
 }
 
-export const PhoneItem = ({ phone, priority }: PhoneItemProps) => {
+const PhoneItemComponent = ({ phone, priority }: PhoneItemProps) => {
   const { id, brand, name, basePrice, imageUrl } = phone;
 
   return (
@@ -41,3 +42,5 @@ export const PhoneItem = ({ phone, priority }: PhoneItemProps) => {
     </Link>
   );
 };
+
+export const PhoneItem = memo(PhoneItemComponent);
