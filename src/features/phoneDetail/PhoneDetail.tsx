@@ -27,9 +27,10 @@ const SimilarProducts = dynamic(
   {
     loading: () => (
       <div
+        role="status"
         aria-busy="true"
-        styles={styles.loadingSection}
         aria-label={PHONE_DETAIL_STRINGS.loadingSimilarProducts}
+        className={styles.loadingSection}
       />
     ),
   }

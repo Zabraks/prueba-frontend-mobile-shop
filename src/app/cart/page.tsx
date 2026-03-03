@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Cart',
-  description: 'Your shopping cart',
+  description:
+    'Review your shopping cart, manage selected items and proceed to checkout. Your cart is saved locally for convenience.',
 };
 
 export default function CartPage() {

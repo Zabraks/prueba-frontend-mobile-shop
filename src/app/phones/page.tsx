@@ -13,7 +13,9 @@ export async function generateMetadata({ searchParams }: PhonesPageProps): Promi
 
   return {
     title: search ? `Search: ${search}` : 'Phones',
-    description: search ? `Search results for ${search}` : 'Browse our mobile phone catalog',
+    description: search
+      ? `Search results for "${search}" in our mobile phone catalog. Find the best smartphones matching your search.`
+      : 'Browse our complete mobile phone catalog. Compare the latest smartphones from top brands like Apple, Samsung, Google and more.',
   };
 }
 

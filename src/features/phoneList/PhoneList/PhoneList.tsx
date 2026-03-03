@@ -47,6 +47,7 @@ export const PhoneList = ({ initialPhones }: PhoneListProps) => {
 
   return (
     <div className={styles.wrapper}>
+      <h1 className="sr-only">{PHONE_LIST_STRINGS.title}</h1>
       <SearchBar value={search} onChange={setSearch} resultsCount={phones.length} />
       <Grid
         items={phones}

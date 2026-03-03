@@ -79,7 +79,6 @@
   color: var(--color-text-primary);
 }
 
-//TODO: refactor
 .selectors {
   @include m.flex-column-gap(var(--space-xl));
 }
