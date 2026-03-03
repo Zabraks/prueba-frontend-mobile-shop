@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { API_CONFIG } from '@/config/api';
 
 export const useDebounce = (value: string, delay: number = API_CONFIG.debounceDelay): string => {
-  const [debouncedValue, setDebouncedValue] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState(() =>
+    value.length >= API_CONFIG.minSearchLength ? value : ''
+  );
 
   useEffect(() => {
     if (value.length < API_CONFIG.minSearchLength) return;

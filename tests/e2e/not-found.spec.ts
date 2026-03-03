@@ -1,5 +1,5 @@
-import { test, expect } from './fixtures';
-import { NOT_FOUND_STRINGS } from '@/features/notFound/constants';
+import { test, expect } from '../fixtures';
+import { NOT_FOUND_STRINGS } from '@/features/layout/notFound/constants';
 
 test.describe('Not Found', () => {
   test.beforeEach(async ({ page }) => {

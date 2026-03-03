@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ErrorView } from '@/features/errorView/ErrorView';
-import { ERROR_VIEW_STRINGS } from '@/features/errorView/constants';
+import { ErrorView } from '@/features/layout/errorView/ErrorView';
+import { ERROR_VIEW_STRINGS } from '@/features/layout/errorView/constants';
 
 describe('ErrorView', () => {
   describe('rendering', () => {

@@ -9,6 +9,7 @@ interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
   resultsCount: number;
+  className?: string;
 }
 
 export const SearchBar = ({ value, onChange, resultsCount }: SearchBarProps) => {

@@ -1,7 +1,7 @@
+@use '@/styles/mixins' as m;
+
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+  @include m.flex-column-gap(var(--space-sm));
 }
 
 .options {

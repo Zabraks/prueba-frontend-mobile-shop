@@ -1,3 +1,5 @@
+@use '@/styles/mixins' as m;
+
 .wrapper {
   padding: var(--space-md) 0;
 }
@@ -23,8 +25,7 @@
 }
 
 .meta {
-  display: flex;
-  justify-content: space-between;
+  @include m.flex-between;
   margin-top: var(--space-sm);
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);

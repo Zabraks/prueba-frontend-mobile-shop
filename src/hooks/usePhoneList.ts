@@ -6,11 +6,11 @@ import { API_CONFIG } from '@/config/api';
 import { phoneKeys } from '@/services/phone/phonesKeys';
 
 export const usePhoneList = (initialData?: PhoneListItem[], params: FetchPhonesListParams = {}) => {
-  return useQuery({
+  return useQuery<PhoneListItem[]>({
     queryKey: phoneKeys.list(params),
     queryFn: () => phoneService.getPhoneList(params),
     initialData,
     placeholderData: (previousData) => previousData,
-    staleTime: API_CONFIG.revalidate.phoneList * 1000,
+    staleTime: API_CONFIG.cache.staleTime.phoneList * 1000,
   });
 };

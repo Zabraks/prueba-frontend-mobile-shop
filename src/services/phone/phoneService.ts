@@ -21,7 +21,7 @@ export const phoneService = {
     const query = `?${queryParams.toString()}` || '';
     const apiPhones = await httpClient<ApiPhone[]>(
       `/products${query}`,
-      API_CONFIG.revalidate.phoneList
+      API_CONFIG.cache.staleTime.phoneList
     );
 
     return apiPhones.map(mapPhone);
@@ -29,7 +29,7 @@ export const phoneService = {
   getPhoneById: async (id: string): Promise<PhoneDetail> => {
     const apiPhoneDetail = await httpClient<ApiPhoneDetailType>(
       `/products/${id}`,
-      API_CONFIG.revalidate.phoneDetail
+      API_CONFIG.cache.staleTime.phoneDetail
     );
     return mapPhoneDetail(apiPhoneDetail);
   },

@@ -28,7 +28,6 @@
       "@/domain/*": ["./src/domain/*"],
       "@/features/*": ["./src/features/*"],
       "@/hooks/*": ["./src/hooks/*"],
-      "@/lib/*": ["./src/lib/*"],
       "@/mocks/*": ["./src/mocks/*"],
       "@/services/*": ["./src/services/*"],
       "@/styles/*": ["./src/styles/*"],

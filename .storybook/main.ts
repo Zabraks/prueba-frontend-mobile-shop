@@ -22,7 +22,6 @@ const config: StorybookConfig = {
       '@/domain': path.resolve(srcPath, 'domain'),
       '@/features': path.resolve(srcPath, 'features'),
       '@/hooks': path.resolve(srcPath, 'hooks'),
-      '@/lib': path.resolve(srcPath, 'lib'),
       '@/mocks': path.resolve(srcPath, 'mocks'),
       '@/services': path.resolve(srcPath, 'services'),
       '@/styles': path.resolve(srcPath, 'styles'),

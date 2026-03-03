@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { PhoneList } from '@/features/phoneList/PhoneList/PhoneList';
 import { PHONE_LIST_STRINGS } from '@/features/phoneList/PhoneList/constants';
 import { SEARCH_BAR_STRINGS } from '@/features/phoneList/SearchBar/constants';
+import { ERROR_VIEW_STRINGS } from '@/features/layout/errorView/constants';
 import { mockPhoneList } from '@/mocks/phonelist.mock';
 
 vi.mock('next/navigation', () => ({
@@ -40,6 +41,7 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: mockPhoneList,
         isError: false,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
@@ -53,6 +55,7 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: mockPhoneList,
         isError: false,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
@@ -66,6 +69,7 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: mockPhoneList,
         isError: false,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
@@ -83,8 +87,8 @@ describe('PhoneList', () => {
       const filtered = filterPhones(query);
 
       mockUsePhoneList
-        .mockReturnValueOnce({ data: mockPhoneList, isError: false } as never)
-        .mockReturnValueOnce({ data: filtered, isError: false } as never);
+        .mockReturnValueOnce({ data: mockPhoneList, isError: false, refetch: vi.fn() } as never)
+        .mockReturnValueOnce({ data: filtered, isError: false, refetch: vi.fn() } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
@@ -101,8 +105,8 @@ describe('PhoneList', () => {
       const filtered = filterPhones(query);
 
       mockUsePhoneList
-        .mockReturnValueOnce({ data: mockPhoneList, isError: false } as never)
-        .mockReturnValueOnce({ data: filtered, isError: false } as never);
+        .mockReturnValueOnce({ data: mockPhoneList, isError: false, refetch: vi.fn() } as never)
+        .mockReturnValueOnce({ data: filtered, isError: false, refetch: vi.fn() } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
@@ -119,8 +123,8 @@ describe('PhoneList', () => {
       const filtered = filterPhones(query);
 
       mockUsePhoneList
-        .mockReturnValueOnce({ data: mockPhoneList, isError: false } as never)
-        .mockReturnValueOnce({ data: filtered, isError: false } as never);
+        .mockReturnValueOnce({ data: mockPhoneList, isError: false, refetch: vi.fn() } as never)
+        .mockReturnValueOnce({ data: filtered, isError: false, refetch: vi.fn() } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
@@ -134,8 +138,8 @@ describe('PhoneList', () => {
 
     it('shows 0 results when search has no matches', () => {
       mockUsePhoneList
-        .mockReturnValueOnce({ data: mockPhoneList, isError: false } as never)
-        .mockReturnValueOnce({ data: [], isError: false } as never);
+        .mockReturnValueOnce({ data: mockPhoneList, isError: false, refetch: vi.fn() } as never)
+        .mockReturnValueOnce({ data: [], isError: false, refetch: vi.fn() } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
@@ -154,9 +158,9 @@ describe('PhoneList', () => {
       const filtered = filterPhones(query);
 
       mockUsePhoneList
-        .mockReturnValueOnce({ data: mockPhoneList, isError: false } as never)
-        .mockReturnValueOnce({ data: filtered, isError: false } as never)
-        .mockReturnValueOnce({ data: mockPhoneList, isError: false } as never);
+        .mockReturnValueOnce({ data: mockPhoneList, isError: false, refetch: vi.fn() } as never)
+        .mockReturnValueOnce({ data: filtered, isError: false, refetch: vi.fn() } as never)
+        .mockReturnValueOnce({ data: mockPhoneList, isError: false, refetch: vi.fn() } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
 
@@ -175,6 +179,7 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: mockPhoneList,
         isError: false,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
@@ -192,6 +197,7 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: filterPhones('apple'),
         isError: false,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
@@ -206,6 +212,7 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: mockPhoneList,
         isError: false,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={mockPhoneList} />);
@@ -225,11 +232,12 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: [],
         isError: true,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={[]} />);
 
-      const errorMessage = screen.getByText(PHONE_LIST_STRINGS.errorMessage);
+      const errorMessage = screen.getByText(ERROR_VIEW_STRINGS.phones.message);
 
       expect(errorMessage).toBeInTheDocument();
     });
@@ -238,6 +246,7 @@ describe('PhoneList', () => {
       mockUsePhoneList.mockReturnValue({
         data: [],
         isError: true,
+        refetch: vi.fn(),
       } as never);
 
       render(<PhoneList initialPhones={[]} />);

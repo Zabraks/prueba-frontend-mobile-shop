@@ -2,12 +2,11 @@
 
 .wrapper {
   @include m.container;
+  @include m.flex-column;
   padding-top: var(--space-lg);
   padding-bottom: var(--space-2xl);
   gap: var(--space-lg);
   min-height: calc(100vh - var(--navbar-height));
-  display: flex;
-  flex-direction: column;
 }
 
 .title {

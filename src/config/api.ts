@@ -4,8 +4,11 @@ export const API_CONFIG = {
   defaultLimit: 20,
   minSearchLength: 3,
   debounceDelay: 400,
-  revalidate: {
-    phoneList: 60,
-    phoneDetail: 3600,
+  cache: {
+    staleTime: {
+      phoneList: 60,
+      phoneDetail: 300,
+    },
+    gcTime: 600,
   },
 } as const;

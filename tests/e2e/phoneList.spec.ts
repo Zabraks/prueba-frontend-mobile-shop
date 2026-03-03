@@ -1,5 +1,5 @@
 import { ROUTES } from '@/config/routes';
-import { test, expect } from './fixtures';
+import { test, expect } from '../fixtures';
 import { PHONE_LIST_STRINGS } from '@/features/phoneList/PhoneList/constants';
 
 test.describe('Phone List', () => {
@@ -8,15 +8,23 @@ test.describe('Phone List', () => {
   });
 
   test('displays the phone grid', async ({ page }) => {
-    await expect(page.getByRole('list', { name: PHONE_LIST_STRINGS.gridAriaLabel })).toBeVisible();
+    const phoneGrid = page.getByRole('list', { name: PHONE_LIST_STRINGS.gridAriaLabel });
+
+    await expect(phoneGrid).toBeVisible();
   });
 
   test('displays 20 phones initially', async ({ page }) => {
-    await expect(page.getByRole('listitem')).toHaveCount(20);
+    const phoneItems = page.getByRole('listitem');
+
+    await expect(phoneItems).toHaveCount(20);
   });
 
   test('navigates to phone detail on card click', async ({ page }) => {
-    await page.getByRole('listitem').first().click();
+    const firstItem = page.getByRole('listitem').first();
+    await expect(firstItem).toBeVisible();
+
+    await Promise.all([page.waitForURL(/\/phones\/.+/), firstItem.click()]);
+
     await expect(page).toHaveURL(/\/phones\/.+/);
   });
 });

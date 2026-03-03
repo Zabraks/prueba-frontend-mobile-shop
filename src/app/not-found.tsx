@@ -1,4 +1,4 @@
-import { NotFound as NotFoundSection } from '@/features/notFound/NotFound';
+import { NotFound as NotFoundSection } from '@/features/layout/notFound/NotFound';
 
 export default function NotFound() {
   return <NotFoundSection />;

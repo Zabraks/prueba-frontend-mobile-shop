@@ -16,7 +16,13 @@ export const CartItem = ({ item, onRemove }: CartItemProps) => {
   return (
     <article className={styles.wrapper} aria-label={name}>
       <div className={styles.imageWrapper}>
-        <Image src={img} alt={name} fill sizes="120px" className={styles.image} />
+        <Image
+          src={img}
+          alt={name}
+          fill
+          sizes="(min-width: 768px) 262px, 160px"
+          className={styles.image}
+        />
       </div>
       <div className={styles.data}>
         <div className={styles.info}>

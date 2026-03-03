@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect } from '@playwright/test';
-import { test } from './fixtures';
+import { test } from '../fixtures';
 
 test.describe('Accessibility', () => {
   test('phone list page should have no accessibility violations', async ({ page }) => {
